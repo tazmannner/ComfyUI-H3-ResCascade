@@ -1,7 +1,8 @@
 # ComfyUI-H3-ResCascade
 
 **Render MiniMax H3 at 1 MP, finish at 1080p or 1440p: about half the time of a native render, with the same take and
-the same audio.**
+the same audio.** A tested hires recipe packed into one node, built on
+[LBH-123-AI's latent upscaler](https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler).
 
 ![Edgerunners rocket at 1920x1088: 1 MP render + H3 Hires Fix](assets/demo_rocket_1920.gif)
 
@@ -16,6 +17,7 @@ Going from 1 MP to 2 MP (1920x1088) costs **about a minute instead of about five
 |---|---|---|---|---|
 | Teen Titans punch | ~178 s | **237 s** (+59 s) | 492 s (+314 s) | **2.1x faster** |
 | base H3 sword fight | 194 s | **~262 s** (+69 s) | 494 s (+300 s) | **1.9x faster** |
+| Edgerunners rocket | 185 s | **~253 s** (+68 s) | 511 s (+326 s) | **2.0x faster** |
 
 ## What you get
 
@@ -34,10 +36,14 @@ Going from 1 MP to 2 MP (1920x1088) costs **about a minute instead of about five
 *Base H3 sword fight, half speed. Left: the finished 1 MP clip upscaled with Lanczos. Right: H3 Hires Fix at 1920.
 Separate hair strands, sharper lashes and irises, a cleaner blade edge.* ([mp4 with sound](assets/demo_detail_zoom.mp4))
 
-![Edgerunners wide shot, small faces: 1 MP + FaceDetail upscaled with Lanczos vs H3 Hires Fix](assets/demo_faces_zoom.gif)
+### Native 2 MP vs 1 MP + H3 Hires Fix
 
-*Small faces in a wide shot, ~4x zoom. Left: 1 MP + FaceDetail, Lanczos. Right: H3 Hires Fix at 1920 with
-FaceDetail's face tiles re-stitched.* ([mp4 with sound](assets/demo_faces_zoom.mp4))
+![Base H3 sword fight: native 1920x1088 (494 s) vs 1 MP + H3 Hires Fix (262 s)](assets/demo_native_vs_hiresfix_sword.gif)
+
+*Same prompt and seed. Left: native 1920x1088, 494 s. Right: 1 MP render + H3 Hires Fix, 262 s. They are different
+takes on purpose: rendering natively at 2 MP re-rolls the whole shot, while H3 Hires Fix keeps the 1 MP take you
+already approved. Same quality class, half the time.* ([mp4 with sound](assets/demo_native_vs_hiresfix_sword.mp4) ·
+[Edgerunners rocket: native 511 s vs ours 253 s](assets/demo_native_vs_hiresfix_rocket.mp4))
 
 More finished clips are in [More examples](#more-examples).
 
@@ -66,6 +72,19 @@ sit above sigma 0.8. A low-res first pass spends those steps on 4x fewer 32 px t
   more than 2 latent frames away.
 
 So: render at ~1 MP, where H3 is strong, and add only lines and texture at the bigger size.
+
+## The recipe (what H3 Hires Fix does, and why these settings)
+
+The upscale model is LBH-123-AI's; the value here is the tested settings around it:
+
+- **Start from a full-quality native 1 MP render**, not a tiny turbo first pass: low-res or turbo first passes lost
+  detail or changed the take in every test.
+- **Refine only from sigma 0.45 down**, on the model's own beta57 schedule tail. 0.31 stays soft, 0.56 starts redrawing
+  features, and ~0.9 (LBH's example) re-decides the whole shot.
+- **Turbo only in that refine** (DMAD 0.8, 2 steps): tested lossless there; in pass 1 it changes the take and the audio.
+- **Pass-1 audio pinned**, so the soundtrack is exactly the 1 MP one.
+
+You can build the same chain from about seven stock nodes; H3 Hires Fix is that chain as one node.
 
 ## Nodes
 
