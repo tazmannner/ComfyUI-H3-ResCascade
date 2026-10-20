@@ -1,0 +1,3840 @@
+{
+ "last_node_id": 64,
+ "last_link_id": 106,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "UNETLoader",
+   "pos": [
+    60,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      1
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "UNETLoader"
+   },
+   "widgets_values": [
+    "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+    "default"
+   ]
+  },
+  {
+   "id": 2,
+   "type": "CLIPLoader",
+   "pos": [
+    60,
+    232
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [
+      4,
+      21,
+      70
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPLoader"
+   },
+   "widgets_values": [
+    "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
+    "minimax",
+    "default"
+   ]
+  },
+  {
+   "id": 3,
+   "type": "VAELoader",
+   "pos": [
+    60,
+    430
+   ],
+   "size": [
+    380,
+    106
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      5,
+      64,
+      71
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "minimax_h3_video_vae_fp16.safetensors"
+   ]
+  },
+  {
+   "id": 4,
+   "type": "VAELoader",
+   "pos": [
+    60,
+    576
+   ],
+   "size": [
+    380,
+    106
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      37,
+      48,
+      85,
+      98
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "minimax_h3_video_vae_int8_convrot.safetensors"
+   ],
+   "title": "int8 video VAE for the final decode"
+  },
+  {
+   "id": 5,
+   "type": "VAELoader",
+   "pos": [
+    60,
+    722
+   ],
+   "size": [
+    380,
+    106
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      41,
+      66
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "minimax_h3_audio_vae_fp32.safetensors"
+   ]
+  },
+  {
+   "id": 6,
+   "type": "FastDeropeTAELoader",
+   "pos": [
+    60,
+    868
+   ],
+   "size": [
+    380,
+    106
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      16,
+      18,
+      22,
+      93
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "FastDeropeTAELoader"
+   },
+   "widgets_values": [
+    "taeh3(1).safetensors"
+   ],
+   "title": "taeh3 for the throwaway decode/encode"
+  },
+  {
+   "id": 7,
+   "type": "ModelAttentionBackend",
+   "pos": [
+    480,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1
+    }
+   ],
+   "outputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "links": [
+      2
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ModelAttentionBackend"
+   },
+   "widgets_values": [
+    "comfy kitchen attention"
+   ]
+  },
+  {
+   "id": 8,
+   "type": "LoraLoaderModelOnly",
+   "pos": [
+    900,
+    60
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 2
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      3,
+      25,
+      74,
+      94
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoraLoaderModelOnly"
+   },
+   "widgets_values": [
+    "h3/edgerunners_h3/EDGERUNNERS_H3_V1-step00001950.safetensors",
+    1.0
+   ]
+  },
+  {
+   "id": 9,
+   "type": "MiniMaxH3SigmaShift",
+   "pos": [
+    1320,
+    60
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 3
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      6,
+      8
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMaxH3SigmaShift"
+   },
+   "widgets_values": [
+    12.0,
+    3.0
+   ]
+  },
+  {
+   "id": 10,
+   "type": "MiniMaxH3ImageToVideo",
+   "pos": [
+    480,
+    232
+   ],
+   "size": [
+    380,
+    288
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 4
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 5
+    },
+    {
+     "name": "first_frame",
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "last_frame",
+     "type": "IMAGE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      7,
+      90
+     ]
+    },
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      13
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMaxH3ImageToVideo"
+   },
+   "widgets_values": [
+    "integrated_multimodal_description: [Shot 1] 2d anime style, cyberpunk edgerunners style, a static wide full shot of a rainy neon city street at night, wet asphalt reflecting pink and cyan signs, tall buildings on both sides. Two characters walk slowly toward the camera down the middle of the street, seen head to toe, small in the frame. On the left, a young man with messy brown hair and a yellow jacket with a white stripe talks with lively mouth movements, glancing at his partner. On the right, a slim young woman with a silver bob haircut with pink tips, red eyeliner and a white cropped jacket smirks and answers him. The young man (S1) says: <d>[Japanese] \u6b21\u306e\u4ed5\u4e8b\u3001\u672c\u5f53\u306b\u3084\u308b\u306e\u304b\uff1f</d> The young woman (S2) says: <d>[Japanese] \u3082\u3061\u308d\u3093\u3002\u6708\u307e\u3067\u884c\u304f\u3093\u3067\u3057\u3087\u3002</d>\n\noverall_soundscape: Rain pattering on the street, a deep low hum of the city, distant traffic rumble, footsteps on wet ground.\n\nnon_diegetic_music: N/A",
+    1344,
+    768,
+    124
+   ]
+  },
+  {
+   "id": 11,
+   "type": "BasicGuider",
+   "pos": [
+    1740,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 6
+    },
+    {
+     "name": "conditioning",
+     "type": "CONDITIONING",
+     "link": 7
+    }
+   ],
+   "outputs": [
+    {
+     "name": "GUIDER",
+     "type": "GUIDER",
+     "links": [
+      10
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BasicGuider"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 12,
+   "type": "RandomNoise",
+   "pos": [
+    60,
+    1014
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "NOISE",
+     "type": "NOISE",
+     "links": [
+      9
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RandomNoise"
+   },
+   "widgets_values": [
+    202,
+    "fixed"
+   ]
+  },
+  {
+   "id": 13,
+   "type": "KSamplerSelect",
+   "pos": [
+    60,
+    1186
+   ],
+   "size": [
+    380,
+    106
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "SAMPLER",
+     "type": "SAMPLER",
+     "links": [
+      11,
+      33
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSamplerSelect"
+   },
+   "widgets_values": [
+    "euler"
+   ]
+  },
+  {
+   "id": 14,
+   "type": "BasicScheduler",
+   "pos": [
+    1740,
+    232
+   ],
+   "size": [
+    380,
+    184
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 8
+    }
+   ],
+   "outputs": [
+    {
+     "name": "SIGMAS",
+     "type": "SIGMAS",
+     "links": [
+      12
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BasicScheduler"
+   },
+   "widgets_values": [
+    "beta57",
+    20,
+    1.0
+   ]
+  },
+  {
+   "id": 15,
+   "type": "SamplerCustomAdvanced",
+   "pos": [
+    2160,
+    60
+   ],
+   "size": [
+    380,
+    210
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "noise",
+     "type": "NOISE",
+     "link": 9
+    },
+    {
+     "name": "guider",
+     "type": "GUIDER",
+     "link": 10
+    },
+    {
+     "name": "sampler",
+     "type": "SAMPLER",
+     "link": 11
+    },
+    {
+     "name": "sigmas",
+     "type": "SIGMAS",
+     "link": 12
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 13
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "LATENT",
+     "links": [
+      14,
+      15,
+      40,
+      47,
+      91
+     ]
+    },
+    {
+     "name": "denoised_output",
+     "type": "LATENT",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "SamplerCustomAdvanced"
+   },
+   "widgets_values": [],
+   "title": "PASS 1: your normal render (choreography + audio)"
+  },
+  {
+   "id": 16,
+   "type": "H3JerkOracle",
+   "pos": [
+    2580,
+    60
+   ],
+   "size": [
+    380,
+    470
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 14
+    }
+   ],
+   "outputs": [
+    {
+     "name": "hold_map",
+     "type": "STRING",
+     "links": [
+      50
+     ]
+    },
+    {
+     "name": "segments",
+     "type": "STRING",
+     "links": []
+    },
+    {
+     "name": "window_start",
+     "type": "INT",
+     "links": []
+    },
+    {
+     "name": "window_len",
+     "type": "INT",
+     "links": []
+    },
+    {
+     "name": "profile",
+     "type": "STRING",
+     "links": []
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3JerkOracle"
+   },
+   "widgets_values": [
+    124,
+    0.75,
+    4,
+    true,
+    "balanced (default)",
+    8,
+    "value |d3| (default)",
+    0.0,
+    24,
+    0.0,
+    18,
+    6.7,
+    "minimax-h3",
+    0
+   ],
+   "title": "MAINodes: where is motion too fast"
+  },
+  {
+   "id": 17,
+   "type": "VAEDecode",
+   "pos": [
+    2580,
+    570
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 15
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 16
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      49
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 18,
+   "type": "VAEEncode",
+   "pos": [
+    3840,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "pixels",
+     "type": "IMAGE",
+     "link": 17
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 18
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      19
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEEncode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 19,
+   "type": "H3V2VInit",
+   "pos": [
+    4260,
+    60
+   ],
+   "size": [
+    380,
+    444
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 19
+    },
+    {
+     "name": "oracle_samples",
+     "type": "LATENT",
+     "link": null
+    },
+    {
+     "name": "mask",
+     "type": "MASK",
+     "link": 20
+    },
+    {
+     "name": "audio_latent",
+     "type": "LATENT",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      35
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3V2VInit"
+   },
+   "widgets_values": [
+    0,
+    0.0,
+    2,
+    0,
+    false,
+    true,
+    "custom (use audio_strength)",
+    1.0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": 20,
+   "type": "MiniMaxH3ImageToVideo",
+   "pos": [
+    3840,
+    232
+   ],
+   "size": [
+    380,
+    314
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 21
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 22
+    },
+    {
+     "name": "length",
+     "type": "INT",
+     "link": 23,
+     "widget": {
+      "name": "length"
+     }
+    },
+    {
+     "name": "first_frame",
+     "type": "IMAGE",
+     "link": 24
+    },
+    {
+     "name": "last_frame",
+     "type": "IMAGE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      29
+     ]
+    },
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMaxH3ImageToVideo"
+   },
+   "widgets_values": [
+    "integrated_multimodal_description: [Shot 1] 2d anime style, cyberpunk edgerunners style, a static wide full shot of a rainy neon city street at night, wet asphalt reflecting pink and cyan signs, tall buildings on both sides. Two characters walk slowly toward the camera down the middle of the street, seen head to toe, small in the frame. On the left, a young man with messy brown hair and a yellow jacket with a white stripe talks with lively mouth movements, glancing at his partner. On the right, a slim young woman with a silver bob haircut with pink tips, red eyeliner and a white cropped jacket smirks and answers him. The young man (S1) says: <d>[Japanese] \u6b21\u306e\u4ed5\u4e8b\u3001\u672c\u5f53\u306b\u3084\u308b\u306e\u304b\uff1f</d> The young woman (S2) says: <d>[Japanese] \u3082\u3061\u308d\u3093\u3002\u6708\u307e\u3067\u884c\u304f\u3093\u3067\u3057\u3087\u3002</d>\n\noverall_soundscape: Rain pattering on the street, a deep low hum of the city, distant traffic rumble, footsteps on wet ground.\n\nnon_diegetic_music: N/A",
+    1344,
+    768,
+    124
+   ]
+  },
+  {
+   "id": 21,
+   "type": "LoraLoaderModelOnly",
+   "pos": [
+    1320,
+    258
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 25
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      26
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoraLoaderModelOnly"
+   },
+   "widgets_values": [
+    "h3/turbo/minimax_h3_DMAD_4step_full_lora_avg_rank_39_bf16.safetensors",
+    0.8
+   ],
+   "title": "turbo LoRA for pass 2"
+  },
+  {
+   "id": 22,
+   "type": "MiniMaxH3SigmaShift",
+   "pos": [
+    1740,
+    456
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 26
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      27
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMaxH3SigmaShift"
+   },
+   "widgets_values": [
+    12.0,
+    2.0
+   ]
+  },
+  {
+   "id": 23,
+   "type": "FastDeropeWindowAttention",
+   "pos": [
+    2160,
+    310
+   ],
+   "size": [
+    380,
+    262
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 27
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      28,
+      30
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "FastDeropeWindowAttention"
+   },
+   "widgets_values": [
+    4,
+    4,
+    8,
+    24,
+    0.0,
+    1.0
+   ],
+   "title": "H3 WINDOW ATTENTION (makes pass 2 cheap)"
+  },
+  {
+   "id": 24,
+   "type": "BasicGuider",
+   "pos": [
+    4260,
+    544
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 28
+    },
+    {
+     "name": "conditioning",
+     "type": "CONDITIONING",
+     "link": 29
+    }
+   ],
+   "outputs": [
+    {
+     "name": "GUIDER",
+     "type": "GUIDER",
+     "links": [
+      32
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BasicGuider"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 25,
+   "type": "H3InjectSchedule",
+   "pos": [
+    2580,
+    742
+   ],
+   "size": [
+    380,
+    210
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 30
+    }
+   ],
+   "outputs": [
+    {
+     "name": "SIGMAS",
+     "type": "SIGMAS",
+     "links": [
+      34
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3InjectSchedule"
+   },
+   "widgets_values": [
+    "simple",
+    8,
+    0.5,
+    "custom"
+   ]
+  },
+  {
+   "id": 26,
+   "type": "RandomNoise",
+   "pos": [
+    60,
+    1332
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "NOISE",
+     "type": "NOISE",
+     "links": [
+      31
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RandomNoise"
+   },
+   "widgets_values": [
+    209,
+    "fixed"
+   ]
+  },
+  {
+   "id": 27,
+   "type": "SamplerCustomAdvanced",
+   "pos": [
+    4680,
+    60
+   ],
+   "size": [
+    380,
+    210
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "noise",
+     "type": "NOISE",
+     "link": 31
+    },
+    {
+     "name": "guider",
+     "type": "GUIDER",
+     "link": 32
+    },
+    {
+     "name": "sampler",
+     "type": "SAMPLER",
+     "link": 33
+    },
+    {
+     "name": "sigmas",
+     "type": "SIGMAS",
+     "link": 34
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 35
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "LATENT",
+     "links": [
+      36
+     ]
+    },
+    {
+     "name": "denoised_output",
+     "type": "LATENT",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "SamplerCustomAdvanced"
+   },
+   "widgets_values": [],
+   "title": "PASS 2: redraw the slowed clip (inject 0.5)"
+  },
+  {
+   "id": 28,
+   "type": "VAEDecode",
+   "pos": [
+    5100,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 12,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 36
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 37
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      38
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 29,
+   "type": "FastDeropeDrawingRecover",
+   "pos": [
+    5520,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 13,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 38
+    },
+    {
+     "name": "drawing_map",
+     "type": "STRING",
+     "link": 39
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      56
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "FastDeropeDrawingRecover"
+   },
+   "widgets_values": [],
+   "title": "MAINodes: back to real time"
+  },
+  {
+   "id": 30,
+   "type": "VAEDecodeAudio",
+   "pos": [
+    2580,
+    992
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 40
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 41
+    }
+   ],
+   "outputs": [
+    {
+     "name": "AUDIO",
+     "type": "AUDIO",
+     "links": [
+      44,
+      46,
+      65,
+      106
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecodeAudio"
+   },
+   "widgets_values": [],
+   "title": "audio: pass 1's normal soundtrack"
+  },
+  {
+   "id": 31,
+   "type": "AnimeCadence",
+   "pos": [
+    8880,
+    60
+   ],
+   "size": [
+    380,
+    262
+   ],
+   "flags": {},
+   "order": 21,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 42
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      45,
+      92,
+      103
+     ]
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": []
+    },
+    {
+     "name": "drawing_starts",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "AnimeCadence"
+   },
+   "widgets_values": [
+    "auto",
+    "sharpest",
+    2,
+    4,
+    1.0,
+    0
+   ],
+   "title": "ANIME CADENCE (auto 2s/3s)"
+  },
+  {
+   "id": 32,
+   "type": "VHS_VideoCombine",
+   "pos": [
+    8880,
+    362
+   ],
+   "size": [
+    380,
+    392
+   ],
+   "flags": {},
+   "order": 21,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 43
+    },
+    {
+     "name": "audio",
+     "type": "AUDIO",
+     "link": 44
+    },
+    {
+     "name": "meta_batch",
+     "type": "VHS_BatchManager",
+     "link": null
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "Filenames",
+     "type": "VHS_FILENAMES",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VHS_VideoCombine"
+   },
+   "widgets_values": {
+    "frame_rate": 24,
+    "loop_count": 0,
+    "filename_prefix": "h3_hires/fast_derope_face_1mp_derope_only",
+    "format": "video/h264-mp4",
+    "pix_fmt": "yuv420p",
+    "crf": 12,
+    "save_metadata": false,
+    "trim_to_audio": false,
+    "pingpong": false,
+    "save_output": true,
+    "videopreview": {
+     "hidden": false,
+     "paused": false,
+     "params": {}
+    }
+   }
+  },
+  {
+   "id": 33,
+   "type": "VHS_VideoCombine",
+   "pos": [
+    9300,
+    60
+   ],
+   "size": [
+    380,
+    392
+   ],
+   "flags": {},
+   "order": 22,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 45
+    },
+    {
+     "name": "audio",
+     "type": "AUDIO",
+     "link": 46
+    },
+    {
+     "name": "meta_batch",
+     "type": "VHS_BatchManager",
+     "link": null
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "Filenames",
+     "type": "VHS_FILENAMES",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VHS_VideoCombine"
+   },
+   "widgets_values": {
+    "frame_rate": 24,
+    "loop_count": 0,
+    "filename_prefix": "h3_hires/fast_derope_face_1mp",
+    "format": "video/h264-mp4",
+    "pix_fmt": "yuv420p",
+    "crf": 12,
+    "save_metadata": true,
+    "trim_to_audio": false,
+    "pingpong": false,
+    "save_output": true,
+    "videopreview": {
+     "hidden": false,
+     "paused": false,
+     "params": {}
+    }
+   }
+  },
+  {
+   "id": 34,
+   "type": "VAEDecode",
+   "pos": [
+    2580,
+    1164
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 47
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 48
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      51,
+      52,
+      54
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 35,
+   "type": "FastDeropeMotionGate",
+   "pos": [
+    3000,
+    60
+   ],
+   "size": [
+    380,
+    340
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 49
+    },
+    {
+     "name": "oracle_hold_map",
+     "type": "STRING",
+     "link": 50
+    },
+    {
+     "name": "static_images",
+     "type": "IMAGE",
+     "link": 51
+    }
+   ],
+   "outputs": [
+    {
+     "name": "segment_images",
+     "type": "IMAGE",
+     "links": [
+      57,
+      61
+     ]
+    },
+    {
+     "name": "hold_map",
+     "type": "STRING",
+     "links": [
+      58
+     ]
+    },
+    {
+     "name": "splice_map",
+     "type": "STRING",
+     "links": [
+      55
+     ]
+    },
+    {
+     "name": "segment_start",
+     "type": "INT",
+     "links": [
+      53
+     ]
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "FastDeropeMotionGate"
+   },
+   "widgets_values": [
+    0.09,
+    5,
+    4,
+    4,
+    12,
+    0.03,
+    8
+   ]
+  },
+  {
+   "id": 36,
+   "type": "ImageFromBatch",
+   "pos": [
+    3420,
+    60
+   ],
+   "size": [
+    380,
+    184
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 52
+    },
+    {
+     "name": "batch_index",
+     "type": "INT",
+     "link": 53,
+     "widget": {
+      "name": "batch_index"
+     }
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      24
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageFromBatch"
+   },
+   "widgets_values": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 37,
+   "type": "FastDeropeSegmentSplice",
+   "pos": [
+    5940,
+    60
+   ],
+   "size": [
+    380,
+    236
+   ],
+   "flags": {},
+   "order": 14,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "baseline",
+     "type": "IMAGE",
+     "link": 54
+    },
+    {
+     "name": "splice_map",
+     "type": "STRING",
+     "link": 55
+    },
+    {
+     "name": "segment",
+     "type": "IMAGE",
+     "link": 56
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      62,
+      86
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "FastDeropeSegmentSplice"
+   },
+   "widgets_values": [
+    6,
+    true,
+    0.03
+   ]
+  },
+  {
+   "id": 38,
+   "type": "FastDeropeDrawingSmear",
+   "pos": [
+    3420,
+    284
+   ],
+   "size": [
+    380,
+    210
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 57
+    },
+    {
+     "name": "hold_map",
+     "type": "STRING",
+     "link": 58
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      17,
+      59
+     ]
+    },
+    {
+     "name": "drawing_map",
+     "type": "STRING",
+     "links": [
+      39,
+      60
+     ]
+    },
+    {
+     "name": "length",
+     "type": "INT",
+     "links": [
+      23
+     ]
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "FastDeropeDrawingSmear"
+   },
+   "widgets_values": [
+    2,
+    true,
+    2
+   ],
+   "title": "DRAWING SMEAR: one static token per 2s drawing (key poses x2)"
+  },
+  {
+   "id": 39,
+   "type": "FastDeropeFreezeMask",
+   "pos": [
+    3840,
+    586
+   ],
+   "size": [
+    380,
+    184
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 59
+    },
+    {
+     "name": "map",
+     "type": "STRING",
+     "link": 60
+    },
+    {
+     "name": "segment_images",
+     "type": "IMAGE",
+     "link": 61
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": [
+      20
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "FastDeropeFreezeMask"
+   },
+   "widgets_values": [
+    0.03
+   ],
+   "title": "FREEZE MASK: lock the splice handles to pass 1 (no ghosting)"
+  },
+  {
+   "id": 40,
+   "type": "H3FaceAtlas",
+   "pos": [
+    6360,
+    60
+   ],
+   "size": [
+    380,
+    392
+   ],
+   "flags": {},
+   "order": 15,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 62
+    }
+   ],
+   "outputs": [
+    {
+     "name": "canvas",
+     "type": "IMAGE",
+     "links": [
+      63
+     ]
+    },
+    {
+     "name": "regen_mask",
+     "type": "MASK",
+     "links": [
+      68
+     ]
+    },
+    {
+     "name": "atlas",
+     "type": "H3_FACE_ATLAS",
+     "links": [
+      78,
+      88,
+      99
+     ]
+    },
+    {
+     "name": "preview",
+     "type": "IMAGE",
+     "links": []
+    },
+    {
+     "name": "width",
+     "type": "INT",
+     "links": [
+      72
+     ]
+    },
+    {
+     "name": "height",
+     "type": "INT",
+     "links": [
+      73
+     ]
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3FaceAtlas"
+   },
+   "widgets_values": [
+    512,
+    2.6,
+    true,
+    1.4,
+    4,
+    0.2,
+    1024,
+    0.5,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "id": 41,
+   "type": "VAEEncode",
+   "pos": [
+    6780,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 16,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "pixels",
+     "type": "IMAGE",
+     "link": 63
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 64
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      67
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEEncode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 42,
+   "type": "VAEEncodeAudio",
+   "pos": [
+    3000,
+    440
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "audio",
+     "type": "AUDIO",
+     "link": 65
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 66
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      69
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEEncodeAudio"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 43,
+   "type": "H3V2VInit",
+   "pos": [
+    7200,
+    60
+   ],
+   "size": [
+    380,
+    444
+   ],
+   "flags": {},
+   "order": 17,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 67
+    },
+    {
+     "name": "oracle_samples",
+     "type": "LATENT",
+     "link": null
+    },
+    {
+     "name": "mask",
+     "type": "MASK",
+     "link": 68
+    },
+    {
+     "name": "audio_latent",
+     "type": "LATENT",
+     "link": 69
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      83
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3V2VInit"
+   },
+   "widgets_values": [
+    0,
+    0.0,
+    2,
+    0,
+    false,
+    true,
+    "pin the original outright (0.0)",
+    1.0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": 44,
+   "type": "MiniMaxH3ImageToVideo",
+   "pos": [
+    6780,
+    232
+   ],
+   "size": [
+    380,
+    340
+   ],
+   "flags": {},
+   "order": 16,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 70
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 71
+    },
+    {
+     "name": "width",
+     "type": "INT",
+     "link": 72,
+     "widget": {
+      "name": "width"
+     }
+    },
+    {
+     "name": "height",
+     "type": "INT",
+     "link": 73,
+     "widget": {
+      "name": "height"
+     }
+    },
+    {
+     "name": "first_frame",
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "last_frame",
+     "type": "IMAGE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      77
+     ]
+    },
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMaxH3ImageToVideo"
+   },
+   "widgets_values": [
+    "integrated_multimodal_description: [Shot 1] 2d anime style, cyberpunk edgerunners style, a static wide full shot of a rainy neon city street at night, wet asphalt reflecting pink and cyan signs, tall buildings on both sides. Two characters walk slowly toward the camera down the middle of the street, seen head to toe, small in the frame. On the left, a young man with messy brown hair and a yellow jacket with a white stripe talks with lively mouth movements, glancing at his partner. On the right, a slim young woman with a silver bob haircut with pink tips, red eyeliner and a white cropped jacket smirks and answers him. The young man (S1) says: <d>[Japanese] \u6b21\u306e\u4ed5\u4e8b\u3001\u672c\u5f53\u306b\u3084\u308b\u306e\u304b\uff1f</d> The young woman (S2) says: <d>[Japanese] \u3082\u3061\u308d\u3093\u3002\u6708\u307e\u3067\u884c\u304f\u3093\u3067\u3057\u3087\u3002</d>\n\noverall_soundscape: Rain pattering on the street, a deep low hum of the city, distant traffic rumble, footsteps on wet ground.\n\nnon_diegetic_music: N/A",
+    1344,
+    768,
+    124
+   ]
+  },
+  {
+   "id": 45,
+   "type": "LoraLoaderModelOnly",
+   "pos": [
+    1320,
+    456
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 74
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      75
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoraLoaderModelOnly"
+   },
+   "widgets_values": [
+    "h3/turbo/minimax_h3_DMAD_4step_full_lora_avg_rank_39_bf16.safetensors",
+    0.8
+   ]
+  },
+  {
+   "id": 46,
+   "type": "MiniMaxH3SigmaShift",
+   "pos": [
+    1740,
+    654
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 75
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      76
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMaxH3SigmaShift"
+   },
+   "widgets_values": [
+    12.0,
+    2.0
+   ]
+  },
+  {
+   "id": 47,
+   "type": "BasicGuider",
+   "pos": [
+    7200,
+    544
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 17,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 76
+    },
+    {
+     "name": "conditioning",
+     "type": "CONDITIONING",
+     "link": 77
+    }
+   ],
+   "outputs": [
+    {
+     "name": "GUIDER",
+     "type": "GUIDER",
+     "links": [
+      80
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BasicGuider"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 48,
+   "type": "RandomNoise",
+   "pos": [
+    60,
+    1504
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "NOISE",
+     "type": "NOISE",
+     "links": [
+      79
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RandomNoise"
+   },
+   "widgets_values": [
+    7,
+    "fixed"
+   ]
+  },
+  {
+   "id": 49,
+   "type": "KSamplerSelect",
+   "pos": [
+    60,
+    1676
+   ],
+   "size": [
+    380,
+    106
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "SAMPLER",
+     "type": "SAMPLER",
+     "links": [
+      81
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSamplerSelect"
+   },
+   "widgets_values": [
+    "euler"
+   ]
+  },
+  {
+   "id": 50,
+   "type": "H3FaceAtlasSigmas",
+   "pos": [
+    6780,
+    612
+   ],
+   "size": [
+    380,
+    236
+   ],
+   "flags": {},
+   "order": 16,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "atlas",
+     "type": "H3_FACE_ATLAS",
+     "link": 78
+    }
+   ],
+   "outputs": [
+    {
+     "name": "sigmas",
+     "type": "SIGMAS",
+     "links": [
+      82
+     ]
+    },
+    {
+     "name": "start_sigma",
+     "type": "FLOAT",
+     "links": []
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3FaceAtlasSigmas"
+   },
+   "widgets_values": [
+    4,
+    0.7,
+    0.8,
+    0.95,
+    12.0
+   ]
+  },
+  {
+   "id": 51,
+   "type": "SamplerCustomAdvanced",
+   "pos": [
+    7620,
+    60
+   ],
+   "size": [
+    380,
+    210
+   ],
+   "flags": {},
+   "order": 18,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "noise",
+     "type": "NOISE",
+     "link": 79
+    },
+    {
+     "name": "guider",
+     "type": "GUIDER",
+     "link": 80
+    },
+    {
+     "name": "sampler",
+     "type": "SAMPLER",
+     "link": 81
+    },
+    {
+     "name": "sigmas",
+     "type": "SIGMAS",
+     "link": 82
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 83
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "LATENT",
+     "links": [
+      84
+     ]
+    },
+    {
+     "name": "denoised_output",
+     "type": "LATENT",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "SamplerCustomAdvanced"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 52,
+   "type": "VAEDecode",
+   "pos": [
+    8040,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 19,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 84
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 85
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      87,
+      101
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 53,
+   "type": "H3FaceAtlasStitch",
+   "pos": [
+    8460,
+    60
+   ],
+   "size": [
+    380,
+    314
+   ],
+   "flags": {},
+   "order": 20,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 86
+    },
+    {
+     "name": "refined",
+     "type": "IMAGE",
+     "link": 87
+    },
+    {
+     "name": "atlas",
+     "type": "H3_FACE_ATLAS",
+     "link": 88
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      42,
+      43
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3FaceAtlasStitch"
+   },
+   "widgets_values": [
+    1.0,
+    3.0,
+    1.0,
+    1.0,
+    true,
+    true
+   ]
+  },
+  {
+   "id": 54,
+   "type": "H3HiresFix",
+   "pos": [
+    9300,
+    492
+   ],
+   "size": [
+    380,
+    444
+   ],
+   "flags": {},
+   "order": 22,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 89
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 90
+    },
+    {
+     "name": "latent",
+     "type": "LATENT",
+     "link": 91
+    },
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 92
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 93
+    },
+    {
+     "name": "face_atlas",
+     "type": "H3_FACE_ATLAS",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "latent",
+     "type": "LATENT",
+     "links": [
+      96
+     ]
+    },
+    {
+     "name": "sigmas",
+     "type": "SIGMAS",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3HiresFix"
+   },
+   "widgets_values": [
+    1920,
+    1088,
+    0.45,
+    209,
+    "minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors",
+    20,
+    2,
+    2.0
+   ],
+   "title": "HIRES: H3 Hires Fix (taeh3 encode, LBH upscale, 2 DMAD steps from 0.45, audio pinned)"
+  },
+  {
+   "id": 55,
+   "type": "LoraLoaderModelOnly",
+   "pos": [
+    1320,
+    654
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 94
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      95
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoraLoaderModelOnly"
+   },
+   "widgets_values": [
+    "h3/turbo/minimax_h3_DMAD_4step_full_lora_avg_rank_39_bf16.safetensors",
+    0.8
+   ],
+   "title": "HIRES: DMAD turbo 0.8 for the refine (take already fixed)"
+  },
+  {
+   "id": 56,
+   "type": "MiniMaxH3SigmaShift",
+   "pos": [
+    1740,
+    852
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 95
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      89
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMaxH3SigmaShift"
+   },
+   "widgets_values": [
+    12.0,
+    3.0
+   ],
+   "title": "HIRES: shift for the refine model"
+  },
+  {
+   "id": 57,
+   "type": "LTXVSeparateAVLatent",
+   "pos": [
+    9720,
+    60
+   ],
+   "size": [
+    380,
+    106
+   ],
+   "flags": {},
+   "order": 23,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "av_latent",
+     "type": "LATENT",
+     "link": 96
+    }
+   ],
+   "outputs": [
+    {
+     "name": "video_latent",
+     "type": "LATENT",
+     "links": [
+      97
+     ]
+    },
+    {
+     "name": "audio_latent",
+     "type": "LATENT",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LTXVSeparateAVLatent"
+   },
+   "widgets_values": [],
+   "title": "HIRES: split video / audio"
+  },
+  {
+   "id": 58,
+   "type": "VAEDecode",
+   "pos": [
+    10140,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 24,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 97
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 98
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      100
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   },
+   "widgets_values": [],
+   "title": "HIRES: decode 1920x1088"
+  },
+  {
+   "id": 59,
+   "type": "H3FaceAtlasRescale",
+   "pos": [
+    6780,
+    888
+   ],
+   "size": [
+    380,
+    158
+   ],
+   "flags": {},
+   "order": 16,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "atlas",
+     "type": "H3_FACE_ATLAS",
+     "link": 99
+    }
+   ],
+   "outputs": [
+    {
+     "name": "H3_FACE_ATLAS",
+     "type": "H3_FACE_ATLAS",
+     "links": [
+      102
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3FaceAtlasRescale"
+   },
+   "widgets_values": [
+    1920,
+    1088
+   ],
+   "title": "HIRES: FaceDetail atlas scaled to 1920x1088"
+  },
+  {
+   "id": 60,
+   "type": "H3FaceAtlasStitchChunked",
+   "pos": [
+    10560,
+    60
+   ],
+   "size": [
+    380,
+    314
+   ],
+   "flags": {},
+   "order": 25,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 100
+    },
+    {
+     "name": "refined",
+     "type": "IMAGE",
+     "link": 101
+    },
+    {
+     "name": "atlas",
+     "type": "H3_FACE_ATLAS",
+     "link": 102
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      104
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3FaceAtlasStitchChunked"
+   },
+   "widgets_values": [
+    128,
+    1.0,
+    3.0,
+    1.0,
+    1.0,
+    true
+   ],
+   "title": "HIRES: FaceDetail's 512 px face tiles stitched onto the hires frames (chunked: long clips stay in RAM)"
+  },
+  {
+   "id": 61,
+   "type": "H3HoldTransfer",
+   "pos": [
+    10980,
+    60
+   ],
+   "size": [
+    380,
+    210
+   ],
+   "flags": {},
+   "order": 26,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "reference",
+     "type": "IMAGE",
+     "link": 103
+    },
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 104
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      105
+     ]
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3HoldTransfer"
+   },
+   "widgets_values": [
+    0.004,
+    2,
+    4
+   ],
+   "title": "HIRES: Hold Transfer (exact 2s/3s holds of the 1 MP clip; never re-run Anime Cadence here)"
+  },
+  {
+   "id": 62,
+   "type": "VHS_VideoCombine",
+   "pos": [
+    11400,
+    60
+   ],
+   "size": [
+    380,
+    392
+   ],
+   "flags": {},
+   "order": 27,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 105
+    },
+    {
+     "name": "audio",
+     "type": "AUDIO",
+     "link": 106
+    },
+    {
+     "name": "meta_batch",
+     "type": "VHS_BatchManager",
+     "link": null
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "Filenames",
+     "type": "VHS_FILENAMES",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VHS_VideoCombine"
+   },
+   "widgets_values": {
+    "frame_rate": 24,
+    "loop_count": 0,
+    "filename_prefix": "h3_hires/fast_derope_face_1920",
+    "format": "video/h264-mp4",
+    "pix_fmt": "yuv420p",
+    "crf": 12,
+    "save_metadata": false,
+    "trim_to_audio": false,
+    "pingpong": false,
+    "save_output": true,
+    "videopreview": {
+     "hidden": false,
+     "paused": false,
+     "params": {}
+    }
+   }
+  },
+  {
+   "id": 63,
+   "type": "Note",
+   "pos": [
+    60,
+    -420
+   ],
+   "size": [
+    500,
+    380
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {},
+   "widgets_values": [
+    "FAST DE-ROPE + ANIME CADENCE\n\nSame smear fix as the 2-pass MAINodes de-rope, with the extra cost roughly halved (Re:Zero i2v 1024x576x124 on a 5090: 246 s -> 167 s; a plain render is ~100 s).\nWhy H3 smears: the latent CAN hold crisp fast poses (VAE round trip is clean); the DiT paints blur when a latent token has to carry fast motion inside it. The de-rope's holds give each fast pose its own static token, but the slowed clip is 2-3x longer and full attention grows with the square of its length.\nH3 Window Attention: in pass 2 each frame attends exactly to its neighbours (+-4 latent frames), every 8th frame as an anchor, and all text/audio/first-frame rows. Pass 2 ~40% faster; fast poses came out as crisp or crisper than dense attention in our tests. window 2 is faster but starts inventing effects.\ntaeh3 does the throwaway decode/encode of the slowed clip (34 s -> 2 s); the int8 video VAE does the final decode.\nAudio is pass 1's normal soundtrack (Exact Recover keeps pass 1's timing)."
+   ]
+  },
+  {
+   "id": 64,
+   "type": "Note",
+   "pos": [
+    580,
+    -420
+   ],
+   "size": [
+    500,
+    380
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {},
+   "widgets_values": [
+    "1 MP -> 1920x1088 after the anime pipeline (see the ResCascade README). The 1 MP pipeline decides everything (motion, de-roped impacts, faces, cadence, audio). H3 Hires Fix redraws only lines/texture at 1920 (DMAD is free here). Small faces would be redrawn badly at 1920, so FaceDetail's own face tiles are stitched again at hires. Re-running Anime Cadence after hires can hold the wrong drawing over an impact frame, so Hold Transfer copies the 1 MP holds instead. Edgerunners wide street: 345 s total (1 MP pipeline ~248 s + hires ~98 s)."
+   ]
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   7,
+   0,
+   "MODEL"
+  ],
+  [
+   2,
+   7,
+   0,
+   8,
+   0,
+   "MODEL"
+  ],
+  [
+   3,
+   8,
+   0,
+   9,
+   0,
+   "MODEL"
+  ],
+  [
+   4,
+   2,
+   0,
+   10,
+   0,
+   "CLIP"
+  ],
+  [
+   5,
+   3,
+   0,
+   10,
+   1,
+   "VAE"
+  ],
+  [
+   6,
+   9,
+   0,
+   11,
+   0,
+   "MODEL"
+  ],
+  [
+   7,
+   10,
+   0,
+   11,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   8,
+   9,
+   0,
+   14,
+   0,
+   "MODEL"
+  ],
+  [
+   9,
+   12,
+   0,
+   15,
+   0,
+   "NOISE"
+  ],
+  [
+   10,
+   11,
+   0,
+   15,
+   1,
+   "GUIDER"
+  ],
+  [
+   11,
+   13,
+   0,
+   15,
+   2,
+   "SAMPLER"
+  ],
+  [
+   12,
+   14,
+   0,
+   15,
+   3,
+   "SIGMAS"
+  ],
+  [
+   13,
+   10,
+   1,
+   15,
+   4,
+   "LATENT"
+  ],
+  [
+   14,
+   15,
+   0,
+   16,
+   0,
+   "LATENT"
+  ],
+  [
+   15,
+   15,
+   0,
+   17,
+   0,
+   "LATENT"
+  ],
+  [
+   16,
+   6,
+   0,
+   17,
+   1,
+   "VAE"
+  ],
+  [
+   17,
+   38,
+   0,
+   18,
+   0,
+   "IMAGE"
+  ],
+  [
+   18,
+   6,
+   0,
+   18,
+   1,
+   "VAE"
+  ],
+  [
+   19,
+   18,
+   0,
+   19,
+   0,
+   "LATENT"
+  ],
+  [
+   20,
+   39,
+   0,
+   19,
+   2,
+   "MASK"
+  ],
+  [
+   21,
+   2,
+   0,
+   20,
+   0,
+   "CLIP"
+  ],
+  [
+   22,
+   6,
+   0,
+   20,
+   1,
+   "VAE"
+  ],
+  [
+   23,
+   38,
+   2,
+   20,
+   2,
+   "INT"
+  ],
+  [
+   24,
+   36,
+   0,
+   20,
+   3,
+   "IMAGE"
+  ],
+  [
+   25,
+   8,
+   0,
+   21,
+   0,
+   "MODEL"
+  ],
+  [
+   26,
+   21,
+   0,
+   22,
+   0,
+   "MODEL"
+  ],
+  [
+   27,
+   22,
+   0,
+   23,
+   0,
+   "MODEL"
+  ],
+  [
+   28,
+   23,
+   0,
+   24,
+   0,
+   "MODEL"
+  ],
+  [
+   29,
+   20,
+   0,
+   24,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   30,
+   23,
+   0,
+   25,
+   0,
+   "MODEL"
+  ],
+  [
+   31,
+   26,
+   0,
+   27,
+   0,
+   "NOISE"
+  ],
+  [
+   32,
+   24,
+   0,
+   27,
+   1,
+   "GUIDER"
+  ],
+  [
+   33,
+   13,
+   0,
+   27,
+   2,
+   "SAMPLER"
+  ],
+  [
+   34,
+   25,
+   0,
+   27,
+   3,
+   "SIGMAS"
+  ],
+  [
+   35,
+   19,
+   0,
+   27,
+   4,
+   "LATENT"
+  ],
+  [
+   36,
+   27,
+   0,
+   28,
+   0,
+   "LATENT"
+  ],
+  [
+   37,
+   4,
+   0,
+   28,
+   1,
+   "VAE"
+  ],
+  [
+   38,
+   28,
+   0,
+   29,
+   0,
+   "IMAGE"
+  ],
+  [
+   39,
+   38,
+   1,
+   29,
+   1,
+   "STRING"
+  ],
+  [
+   40,
+   15,
+   0,
+   30,
+   0,
+   "LATENT"
+  ],
+  [
+   41,
+   5,
+   0,
+   30,
+   1,
+   "VAE"
+  ],
+  [
+   42,
+   53,
+   0,
+   31,
+   0,
+   "IMAGE"
+  ],
+  [
+   43,
+   53,
+   0,
+   32,
+   0,
+   "IMAGE"
+  ],
+  [
+   44,
+   30,
+   0,
+   32,
+   1,
+   "AUDIO"
+  ],
+  [
+   45,
+   31,
+   0,
+   33,
+   0,
+   "IMAGE"
+  ],
+  [
+   46,
+   30,
+   0,
+   33,
+   1,
+   "AUDIO"
+  ],
+  [
+   47,
+   15,
+   0,
+   34,
+   0,
+   "LATENT"
+  ],
+  [
+   48,
+   4,
+   0,
+   34,
+   1,
+   "VAE"
+  ],
+  [
+   49,
+   17,
+   0,
+   35,
+   0,
+   "IMAGE"
+  ],
+  [
+   50,
+   16,
+   0,
+   35,
+   1,
+   "STRING"
+  ],
+  [
+   51,
+   34,
+   0,
+   35,
+   2,
+   "IMAGE"
+  ],
+  [
+   52,
+   34,
+   0,
+   36,
+   0,
+   "IMAGE"
+  ],
+  [
+   53,
+   35,
+   3,
+   36,
+   1,
+   "INT"
+  ],
+  [
+   54,
+   34,
+   0,
+   37,
+   0,
+   "IMAGE"
+  ],
+  [
+   55,
+   35,
+   2,
+   37,
+   1,
+   "STRING"
+  ],
+  [
+   56,
+   29,
+   0,
+   37,
+   2,
+   "IMAGE"
+  ],
+  [
+   57,
+   35,
+   0,
+   38,
+   0,
+   "IMAGE"
+  ],
+  [
+   58,
+   35,
+   1,
+   38,
+   1,
+   "STRING"
+  ],
+  [
+   59,
+   38,
+   0,
+   39,
+   0,
+   "IMAGE"
+  ],
+  [
+   60,
+   38,
+   1,
+   39,
+   1,
+   "STRING"
+  ],
+  [
+   61,
+   35,
+   0,
+   39,
+   2,
+   "IMAGE"
+  ],
+  [
+   62,
+   37,
+   0,
+   40,
+   0,
+   "IMAGE"
+  ],
+  [
+   63,
+   40,
+   0,
+   41,
+   0,
+   "IMAGE"
+  ],
+  [
+   64,
+   3,
+   0,
+   41,
+   1,
+   "VAE"
+  ],
+  [
+   65,
+   30,
+   0,
+   42,
+   0,
+   "AUDIO"
+  ],
+  [
+   66,
+   5,
+   0,
+   42,
+   1,
+   "VAE"
+  ],
+  [
+   67,
+   41,
+   0,
+   43,
+   0,
+   "LATENT"
+  ],
+  [
+   68,
+   40,
+   1,
+   43,
+   2,
+   "MASK"
+  ],
+  [
+   69,
+   42,
+   0,
+   43,
+   3,
+   "LATENT"
+  ],
+  [
+   70,
+   2,
+   0,
+   44,
+   0,
+   "CLIP"
+  ],
+  [
+   71,
+   3,
+   0,
+   44,
+   1,
+   "VAE"
+  ],
+  [
+   72,
+   40,
+   4,
+   44,
+   2,
+   "INT"
+  ],
+  [
+   73,
+   40,
+   5,
+   44,
+   3,
+   "INT"
+  ],
+  [
+   74,
+   8,
+   0,
+   45,
+   0,
+   "MODEL"
+  ],
+  [
+   75,
+   45,
+   0,
+   46,
+   0,
+   "MODEL"
+  ],
+  [
+   76,
+   46,
+   0,
+   47,
+   0,
+   "MODEL"
+  ],
+  [
+   77,
+   44,
+   0,
+   47,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   78,
+   40,
+   2,
+   50,
+   0,
+   "H3_FACE_ATLAS"
+  ],
+  [
+   79,
+   48,
+   0,
+   51,
+   0,
+   "NOISE"
+  ],
+  [
+   80,
+   47,
+   0,
+   51,
+   1,
+   "GUIDER"
+  ],
+  [
+   81,
+   49,
+   0,
+   51,
+   2,
+   "SAMPLER"
+  ],
+  [
+   82,
+   50,
+   0,
+   51,
+   3,
+   "SIGMAS"
+  ],
+  [
+   83,
+   43,
+   0,
+   51,
+   4,
+   "LATENT"
+  ],
+  [
+   84,
+   51,
+   0,
+   52,
+   0,
+   "LATENT"
+  ],
+  [
+   85,
+   4,
+   0,
+   52,
+   1,
+   "VAE"
+  ],
+  [
+   86,
+   37,
+   0,
+   53,
+   0,
+   "IMAGE"
+  ],
+  [
+   87,
+   52,
+   0,
+   53,
+   1,
+   "IMAGE"
+  ],
+  [
+   88,
+   40,
+   2,
+   53,
+   2,
+   "H3_FACE_ATLAS"
+  ],
+  [
+   89,
+   56,
+   0,
+   54,
+   0,
+   "MODEL"
+  ],
+  [
+   90,
+   10,
+   0,
+   54,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   91,
+   15,
+   0,
+   54,
+   2,
+   "LATENT"
+  ],
+  [
+   92,
+   31,
+   0,
+   54,
+   3,
+   "IMAGE"
+  ],
+  [
+   93,
+   6,
+   0,
+   54,
+   4,
+   "VAE"
+  ],
+  [
+   94,
+   8,
+   0,
+   55,
+   0,
+   "MODEL"
+  ],
+  [
+   95,
+   55,
+   0,
+   56,
+   0,
+   "MODEL"
+  ],
+  [
+   96,
+   54,
+   0,
+   57,
+   0,
+   "LATENT"
+  ],
+  [
+   97,
+   57,
+   0,
+   58,
+   0,
+   "LATENT"
+  ],
+  [
+   98,
+   4,
+   0,
+   58,
+   1,
+   "VAE"
+  ],
+  [
+   99,
+   40,
+   2,
+   59,
+   0,
+   "H3_FACE_ATLAS"
+  ],
+  [
+   100,
+   58,
+   0,
+   60,
+   0,
+   "IMAGE"
+  ],
+  [
+   101,
+   52,
+   0,
+   60,
+   1,
+   "IMAGE"
+  ],
+  [
+   102,
+   59,
+   0,
+   60,
+   2,
+   "H3_FACE_ATLAS"
+  ],
+  [
+   103,
+   31,
+   0,
+   61,
+   0,
+   "IMAGE"
+  ],
+  [
+   104,
+   60,
+   0,
+   61,
+   1,
+   "IMAGE"
+  ],
+  [
+   105,
+   61,
+   0,
+   62,
+   0,
+   "IMAGE"
+  ],
+  [
+   106,
+   30,
+   0,
+   62,
+   1,
+   "AUDIO"
+  ]
+ ],
+ "groups": [],
+ "config": {},
+ "extra": {},
+ "version": 0.4
+}

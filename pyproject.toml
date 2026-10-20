@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-h3-rescascade"
+description = "Render MiniMax H3 at 1 MP, finish at 1080p/1440p: learned latent upscale + short low-sigma refine with the pass-1 audio pinned. About half the time of a native render, same take. Plus hold transfer and FaceDetail re-stitch for the anime pipeline, and a LoRA-free pass-1 speed-up."
+version = "0.1.0"
+license = { file = "LICENSE" }
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/tazmannner/ComfyUI-H3-ResCascade"
+
+[tool.comfy]
+PublisherId = "tazmannner"
+DisplayName = "H3 ResCascade (Hires Fix)"
+Icon = ""
