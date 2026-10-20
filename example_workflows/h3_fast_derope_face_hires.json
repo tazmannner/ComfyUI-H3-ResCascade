@@ -1,6 +1,6 @@
 {
- "last_node_id": 64,
- "last_link_id": 106,
+ "last_node_id": 67,
+ "last_link_id": 114,
  "nodes": [
   {
    "id": 1,
@@ -55,8 +55,8 @@
      "type": "CLIP",
      "links": [
       4,
-      21,
-      70
+      22,
+      72
      ]
     }
    ],
@@ -90,8 +90,8 @@
      "type": "VAE",
      "links": [
       5,
-      64,
-      71
+      66,
+      73
      ]
     }
    ],
@@ -122,10 +122,10 @@
      "name": "VAE",
      "type": "VAE",
      "links": [
-      37,
-      48,
-      85,
-      98
+      39,
+      50,
+      87,
+      106
      ]
     }
    ],
@@ -157,8 +157,9 @@
      "name": "VAE",
      "type": "VAE",
      "links": [
-      41,
-      66
+      43,
+      68,
+      96
      ]
     }
    ],
@@ -191,8 +192,8 @@
      "links": [
       16,
       18,
-      22,
-      93
+      23,
+      101
      ]
     }
    ],
@@ -268,9 +269,9 @@
      "type": "MODEL",
      "links": [
       3,
-      25,
-      74,
-      94
+      27,
+      76,
+      102
      ]
     }
    ],
@@ -363,7 +364,7 @@
      "type": "CONDITIONING",
      "links": [
       7,
-      90
+      98
      ]
     },
     {
@@ -477,7 +478,7 @@
      "type": "SAMPLER",
      "links": [
       11,
-      33
+      35
      ]
     }
    ],
@@ -575,9 +576,9 @@
      "links": [
       14,
       15,
-      40,
-      47,
-      91
+      42,
+      49,
+      99
      ]
     },
     {
@@ -618,7 +619,7 @@
      "name": "hold_map",
      "type": "STRING",
      "links": [
-      50
+      52
      ]
     },
     {
@@ -699,7 +700,7 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      49
+      51
      ]
     }
    ],
@@ -752,7 +753,7 @@
    "id": 19,
    "type": "H3V2VInit",
    "pos": [
-    4260,
+    4680,
     60
    ],
    "size": [
@@ -760,7 +761,7 @@
     444
    ],
    "flags": {},
-   "order": 10,
+   "order": 11,
    "mode": 0,
    "inputs": [
     {
@@ -781,7 +782,7 @@
     {
      "name": "audio_latent",
      "type": "LATENT",
-     "link": null
+     "link": 21
     }
    ],
    "outputs": [
@@ -789,7 +790,7 @@
      "name": "LATENT",
      "type": "LATENT",
      "links": [
-      35
+      37
      ]
     }
    ],
@@ -803,7 +804,7 @@
     0,
     false,
     true,
-    "custom (use audio_strength)",
+    "pin the original outright (0.0)",
     1.0,
     0,
     0
@@ -813,31 +814,39 @@
    "id": 20,
    "type": "MiniMaxH3ImageToVideo",
    "pos": [
-    3840,
-    232
+    4260,
+    60
    ],
    "size": [
     380,
-    314
+    340
    ],
    "flags": {},
-   "order": 9,
+   "order": 10,
    "mode": 0,
    "inputs": [
     {
      "name": "clip",
      "type": "CLIP",
-     "link": 21
+     "link": 22
     },
     {
      "name": "vae",
      "type": "VAE",
-     "link": 22
+     "link": 23
+    },
+    {
+     "name": "prompt",
+     "type": "STRING",
+     "link": 24,
+     "widget": {
+      "name": "prompt"
+     }
     },
     {
      "name": "length",
      "type": "INT",
-     "link": 23,
+     "link": 25,
      "widget": {
       "name": "length"
      }
@@ -845,7 +854,7 @@
     {
      "name": "first_frame",
      "type": "IMAGE",
-     "link": 24
+     "link": 26
     },
     {
      "name": "last_frame",
@@ -858,7 +867,7 @@
      "name": "positive",
      "type": "CONDITIONING",
      "links": [
-      29
+      31
      ]
     },
     {
@@ -871,7 +880,7 @@
     "Node name for S&R": "MiniMaxH3ImageToVideo"
    },
    "widgets_values": [
-    "integrated_multimodal_description: [Shot 1] 2d anime style, cyberpunk edgerunners style, a static wide full shot of a rainy neon city street at night, wet asphalt reflecting pink and cyan signs, tall buildings on both sides. Two characters walk slowly toward the camera down the middle of the street, seen head to toe, small in the frame. On the left, a young man with messy brown hair and a yellow jacket with a white stripe talks with lively mouth movements, glancing at his partner. On the right, a slim young woman with a silver bob haircut with pink tips, red eyeliner and a white cropped jacket smirks and answers him. The young man (S1) says: <d>[Japanese] \u6b21\u306e\u4ed5\u4e8b\u3001\u672c\u5f53\u306b\u3084\u308b\u306e\u304b\uff1f</d> The young woman (S2) says: <d>[Japanese] \u3082\u3061\u308d\u3093\u3002\u6708\u307e\u3067\u884c\u304f\u3093\u3067\u3057\u3087\u3002</d>\n\noverall_soundscape: Rain pattering on the street, a deep low hum of the city, distant traffic rumble, footsteps on wet ground.\n\nnon_diegetic_music: N/A",
+    "",
     1344,
     768,
     124
@@ -895,7 +904,7 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 25
+     "link": 27
     }
    ],
    "outputs": [
@@ -903,7 +912,7 @@
      "name": "MODEL",
      "type": "MODEL",
      "links": [
-      26
+      28
      ]
     }
    ],
@@ -934,7 +943,7 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 26
+     "link": 28
     }
    ],
    "outputs": [
@@ -942,7 +951,7 @@
      "name": "MODEL",
      "type": "MODEL",
      "links": [
-      27
+      29
      ]
     }
    ],
@@ -972,7 +981,7 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 27
+     "link": 29
     }
    ],
    "outputs": [
@@ -980,8 +989,8 @@
      "name": "MODEL",
      "type": "MODEL",
      "links": [
-      28,
-      30
+      30,
+      32
      ]
     }
    ],
@@ -1002,7 +1011,7 @@
    "id": 24,
    "type": "BasicGuider",
    "pos": [
-    4260,
+    4680,
     544
    ],
    "size": [
@@ -1010,18 +1019,18 @@
     132
    ],
    "flags": {},
-   "order": 10,
+   "order": 11,
    "mode": 0,
    "inputs": [
     {
      "name": "model",
      "type": "MODEL",
-     "link": 28
+     "link": 30
     },
     {
      "name": "conditioning",
      "type": "CONDITIONING",
-     "link": 29
+     "link": 31
     }
    ],
    "outputs": [
@@ -1029,7 +1038,7 @@
      "name": "GUIDER",
      "type": "GUIDER",
      "links": [
-      32
+      34
      ]
     }
    ],
@@ -1056,7 +1065,7 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 30
+     "link": 32
     }
    ],
    "outputs": [
@@ -1064,7 +1073,7 @@
      "name": "SIGMAS",
      "type": "SIGMAS",
      "links": [
-      34
+      36
      ]
     }
    ],
@@ -1098,7 +1107,7 @@
      "name": "NOISE",
      "type": "NOISE",
      "links": [
-      31
+      33
      ]
     }
    ],
@@ -1114,7 +1123,7 @@
    "id": 27,
    "type": "SamplerCustomAdvanced",
    "pos": [
-    4680,
+    5100,
     60
    ],
    "size": [
@@ -1122,33 +1131,33 @@
     210
    ],
    "flags": {},
-   "order": 11,
+   "order": 12,
    "mode": 0,
    "inputs": [
     {
      "name": "noise",
      "type": "NOISE",
-     "link": 31
+     "link": 33
     },
     {
      "name": "guider",
      "type": "GUIDER",
-     "link": 32
+     "link": 34
     },
     {
      "name": "sampler",
      "type": "SAMPLER",
-     "link": 33
+     "link": 35
     },
     {
      "name": "sigmas",
      "type": "SIGMAS",
-     "link": 34
+     "link": 36
     },
     {
      "name": "latent_image",
      "type": "LATENT",
-     "link": 35
+     "link": 37
     }
    ],
    "outputs": [
@@ -1156,7 +1165,7 @@
      "name": "output",
      "type": "LATENT",
      "links": [
-      36
+      38
      ]
     },
     {
@@ -1175,46 +1184,6 @@
    "id": 28,
    "type": "VAEDecode",
    "pos": [
-    5100,
-    60
-   ],
-   "size": [
-    380,
-    132
-   ],
-   "flags": {},
-   "order": 12,
-   "mode": 0,
-   "inputs": [
-    {
-     "name": "samples",
-     "type": "LATENT",
-     "link": 36
-    },
-    {
-     "name": "vae",
-     "type": "VAE",
-     "link": 37
-    }
-   ],
-   "outputs": [
-    {
-     "name": "IMAGE",
-     "type": "IMAGE",
-     "links": [
-      38
-     ]
-    }
-   ],
-   "properties": {
-    "Node name for S&R": "VAEDecode"
-   },
-   "widgets_values": []
-  },
-  {
-   "id": 29,
-   "type": "FastDeropeDrawingRecover",
-   "pos": [
     5520,
     60
    ],
@@ -1227,13 +1196,13 @@
    "mode": 0,
    "inputs": [
     {
-     "name": "images",
-     "type": "IMAGE",
+     "name": "samples",
+     "type": "LATENT",
      "link": 38
     },
     {
-     "name": "drawing_map",
-     "type": "STRING",
+     "name": "vae",
+     "type": "VAE",
      "link": 39
     }
    ],
@@ -1242,7 +1211,47 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      56
+      40
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 29,
+   "type": "FastDeropeDrawingRecover",
+   "pos": [
+    5940,
+    60
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 14,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 40
+    },
+    {
+     "name": "drawing_map",
+     "type": "STRING",
+     "link": 41
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      58
      ]
     }
    ],
@@ -1270,12 +1279,12 @@
     {
      "name": "samples",
      "type": "LATENT",
-     "link": 40
+     "link": 42
     },
     {
      "name": "vae",
      "type": "VAE",
-     "link": 41
+     "link": 43
     }
    ],
    "outputs": [
@@ -1283,10 +1292,11 @@
      "name": "AUDIO",
      "type": "AUDIO",
      "links": [
-      44,
       46,
-      65,
-      106
+      48,
+      67,
+      93,
+      114
      ]
     }
    ],
@@ -1300,21 +1310,26 @@
    "id": 31,
    "type": "AnimeCadence",
    "pos": [
-    8880,
+    9300,
     60
    ],
    "size": [
     380,
-    262
+    314
    ],
    "flags": {},
-   "order": 21,
+   "order": 22,
    "mode": 0,
    "inputs": [
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 42
+     "link": 44
+    },
+    {
+     "name": "drawing_starts",
+     "type": "STRING",
+     "link": null
     }
    ],
    "outputs": [
@@ -1322,9 +1337,8 @@
      "name": "images",
      "type": "IMAGE",
      "links": [
-      45,
-      92,
-      103
+      47,
+      111
      ]
     },
     {
@@ -1347,7 +1361,8 @@
     2,
     4,
     1.0,
-    0
+    0,
+    "hold"
    ],
    "title": "ANIME CADENCE (auto 2s/3s)"
   },
@@ -1355,26 +1370,26 @@
    "id": 32,
    "type": "VHS_VideoCombine",
    "pos": [
-    8880,
-    362
+    9300,
+    414
    ],
    "size": [
     380,
     392
    ],
    "flags": {},
-   "order": 21,
+   "order": 22,
    "mode": 0,
    "inputs": [
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 43
+     "link": 45
     },
     {
      "name": "audio",
      "type": "AUDIO",
-     "link": 44
+     "link": 46
     },
     {
      "name": "meta_batch",
@@ -1419,7 +1434,7 @@
    "id": 33,
    "type": "VHS_VideoCombine",
    "pos": [
-    9300,
+    9720,
     60
    ],
    "size": [
@@ -1427,18 +1442,18 @@
     392
    ],
    "flags": {},
-   "order": 22,
+   "order": 23,
    "mode": 0,
    "inputs": [
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 45
+     "link": 47
     },
     {
      "name": "audio",
      "type": "AUDIO",
-     "link": 46
+     "link": 48
     },
     {
      "name": "meta_batch",
@@ -1497,12 +1512,12 @@
     {
      "name": "samples",
      "type": "LATENT",
-     "link": 47
+     "link": 49
     },
     {
      "name": "vae",
      "type": "VAE",
-     "link": 48
+     "link": 50
     }
    ],
    "outputs": [
@@ -1510,9 +1525,9 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      51,
-      52,
-      54
+      53,
+      54,
+      56
      ]
     }
    ],
@@ -1530,7 +1545,7 @@
    ],
    "size": [
     380,
-    340
+    366
    ],
    "flags": {},
    "order": 7,
@@ -1539,17 +1554,17 @@
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 49
+     "link": 51
     },
     {
      "name": "oracle_hold_map",
      "type": "STRING",
-     "link": 50
+     "link": 52
     },
     {
      "name": "static_images",
      "type": "IMAGE",
-     "link": 51
+     "link": 53
     }
    ],
    "outputs": [
@@ -1557,29 +1572,30 @@
      "name": "segment_images",
      "type": "IMAGE",
      "links": [
-      57,
-      61
+      59,
+      63
      ]
     },
     {
      "name": "hold_map",
      "type": "STRING",
      "links": [
-      58
+      60
      ]
     },
     {
      "name": "splice_map",
      "type": "STRING",
      "links": [
-      55
+      57
      ]
     },
     {
      "name": "segment_start",
      "type": "INT",
      "links": [
-      53
+      55,
+      92
      ]
     },
     {
@@ -1598,7 +1614,8 @@
     4,
     12,
     0.03,
-    8
+    8,
+    12
    ]
   },
   {
@@ -1619,12 +1636,12 @@
     {
      "name": "image",
      "type": "IMAGE",
-     "link": 52
+     "link": 54
     },
     {
      "name": "batch_index",
      "type": "INT",
-     "link": 53,
+     "link": 55,
      "widget": {
       "name": "batch_index"
      }
@@ -1635,7 +1652,7 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      24
+      26
      ]
     }
    ],
@@ -1651,7 +1668,7 @@
    "id": 37,
    "type": "FastDeropeSegmentSplice",
    "pos": [
-    5940,
+    6360,
     60
    ],
    "size": [
@@ -1659,23 +1676,23 @@
     236
    ],
    "flags": {},
-   "order": 14,
+   "order": 15,
    "mode": 0,
    "inputs": [
     {
      "name": "baseline",
      "type": "IMAGE",
-     "link": 54
+     "link": 56
     },
     {
      "name": "splice_map",
      "type": "STRING",
-     "link": 55
+     "link": 57
     },
     {
      "name": "segment",
      "type": "IMAGE",
-     "link": 56
+     "link": 58
     }
    ],
    "outputs": [
@@ -1683,8 +1700,8 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      62,
-      86
+      64,
+      88
      ]
     }
    ],
@@ -1715,12 +1732,12 @@
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 57
+     "link": 59
     },
     {
      "name": "hold_map",
      "type": "STRING",
-     "link": 58
+     "link": 60
     }
    ],
    "outputs": [
@@ -1729,28 +1746,36 @@
      "type": "IMAGE",
      "links": [
       17,
-      59
+      61
      ]
     },
     {
      "name": "drawing_map",
      "type": "STRING",
      "links": [
-      39,
-      60
+      41,
+      62,
+      91
      ]
     },
     {
      "name": "length",
      "type": "INT",
      "links": [
-      23
+      25
      ]
     },
     {
      "name": "report",
      "type": "STRING",
      "links": []
+    },
+    {
+     "name": "audio_hold_map",
+     "type": "STRING",
+     "links": [
+      94
+     ]
     }
    ],
    "properties": {
@@ -1768,7 +1793,7 @@
    "type": "FastDeropeFreezeMask",
    "pos": [
     3840,
-    586
+    232
    ],
    "size": [
     380,
@@ -1781,17 +1806,17 @@
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 59
+     "link": 61
     },
     {
      "name": "map",
      "type": "STRING",
-     "link": 60
+     "link": 62
     },
     {
      "name": "segment_images",
      "type": "IMAGE",
-     "link": 61
+     "link": 63
     }
    ],
    "outputs": [
@@ -1815,7 +1840,7 @@
    "id": 40,
    "type": "H3FaceAtlas",
    "pos": [
-    6360,
+    6780,
     60
    ],
    "size": [
@@ -1823,13 +1848,13 @@
     392
    ],
    "flags": {},
-   "order": 15,
+   "order": 16,
    "mode": 0,
    "inputs": [
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 62
+     "link": 64
     }
    ],
    "outputs": [
@@ -1837,23 +1862,23 @@
      "name": "canvas",
      "type": "IMAGE",
      "links": [
-      63
+      65
      ]
     },
     {
      "name": "regen_mask",
      "type": "MASK",
      "links": [
-      68
+      70
      ]
     },
     {
      "name": "atlas",
      "type": "H3_FACE_ATLAS",
      "links": [
-      78,
-      88,
-      99
+      80,
+      90,
+      107
      ]
     },
     {
@@ -1865,14 +1890,14 @@
      "name": "width",
      "type": "INT",
      "links": [
-      72
+      74
      ]
     },
     {
      "name": "height",
      "type": "INT",
      "links": [
-      73
+      75
      ]
     },
     {
@@ -1902,7 +1927,7 @@
    "id": 41,
    "type": "VAEEncode",
    "pos": [
-    6780,
+    7200,
     60
    ],
    "size": [
@@ -1910,52 +1935,12 @@
     132
    ],
    "flags": {},
-   "order": 16,
+   "order": 17,
    "mode": 0,
    "inputs": [
     {
      "name": "pixels",
      "type": "IMAGE",
-     "link": 63
-    },
-    {
-     "name": "vae",
-     "type": "VAE",
-     "link": 64
-    }
-   ],
-   "outputs": [
-    {
-     "name": "LATENT",
-     "type": "LATENT",
-     "links": [
-      67
-     ]
-    }
-   ],
-   "properties": {
-    "Node name for S&R": "VAEEncode"
-   },
-   "widgets_values": []
-  },
-  {
-   "id": 42,
-   "type": "VAEEncodeAudio",
-   "pos": [
-    3000,
-    440
-   ],
-   "size": [
-    380,
-    132
-   ],
-   "flags": {},
-   "order": 7,
-   "mode": 0,
-   "inputs": [
-    {
-     "name": "audio",
-     "type": "AUDIO",
      "link": 65
     },
     {
@@ -1974,6 +1959,46 @@
     }
    ],
    "properties": {
+    "Node name for S&R": "VAEEncode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 42,
+   "type": "VAEEncodeAudio",
+   "pos": [
+    3000,
+    466
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "audio",
+     "type": "AUDIO",
+     "link": 67
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 68
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      71
+     ]
+    }
+   ],
+   "properties": {
     "Node name for S&R": "VAEEncodeAudio"
    },
    "widgets_values": []
@@ -1982,7 +2007,7 @@
    "id": 43,
    "type": "H3V2VInit",
    "pos": [
-    7200,
+    7620,
     60
    ],
    "size": [
@@ -1990,13 +2015,13 @@
     444
    ],
    "flags": {},
-   "order": 17,
+   "order": 18,
    "mode": 0,
    "inputs": [
     {
      "name": "samples",
      "type": "LATENT",
-     "link": 67
+     "link": 69
     },
     {
      "name": "oracle_samples",
@@ -2006,12 +2031,12 @@
     {
      "name": "mask",
      "type": "MASK",
-     "link": 68
+     "link": 70
     },
     {
      "name": "audio_latent",
      "type": "LATENT",
-     "link": 69
+     "link": 71
     }
    ],
    "outputs": [
@@ -2019,7 +2044,7 @@
      "name": "LATENT",
      "type": "LATENT",
      "links": [
-      83
+      85
      ]
     }
    ],
@@ -2043,7 +2068,7 @@
    "id": 44,
    "type": "MiniMaxH3ImageToVideo",
    "pos": [
-    6780,
+    7200,
     232
    ],
    "size": [
@@ -2051,23 +2076,23 @@
     340
    ],
    "flags": {},
-   "order": 16,
+   "order": 17,
    "mode": 0,
    "inputs": [
     {
      "name": "clip",
      "type": "CLIP",
-     "link": 70
+     "link": 72
     },
     {
      "name": "vae",
      "type": "VAE",
-     "link": 71
+     "link": 73
     },
     {
      "name": "width",
      "type": "INT",
-     "link": 72,
+     "link": 74,
      "widget": {
       "name": "width"
      }
@@ -2075,7 +2100,7 @@
     {
      "name": "height",
      "type": "INT",
-     "link": 73,
+     "link": 75,
      "widget": {
       "name": "height"
      }
@@ -2096,7 +2121,7 @@
      "name": "positive",
      "type": "CONDITIONING",
      "links": [
-      77
+      79
      ]
     },
     {
@@ -2133,7 +2158,7 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 74
+     "link": 76
     }
    ],
    "outputs": [
@@ -2141,7 +2166,7 @@
      "name": "MODEL",
      "type": "MODEL",
      "links": [
-      75
+      77
      ]
     }
    ],
@@ -2171,7 +2196,7 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 75
+     "link": 77
     }
    ],
    "outputs": [
@@ -2179,7 +2204,7 @@
      "name": "MODEL",
      "type": "MODEL",
      "links": [
-      76
+      78
      ]
     }
    ],
@@ -2195,7 +2220,7 @@
    "id": 47,
    "type": "BasicGuider",
    "pos": [
-    7200,
+    7620,
     544
    ],
    "size": [
@@ -2203,18 +2228,18 @@
     132
    ],
    "flags": {},
-   "order": 17,
+   "order": 18,
    "mode": 0,
    "inputs": [
     {
      "name": "model",
      "type": "MODEL",
-     "link": 76
+     "link": 78
     },
     {
      "name": "conditioning",
      "type": "CONDITIONING",
-     "link": 77
+     "link": 79
     }
    ],
    "outputs": [
@@ -2222,7 +2247,7 @@
      "name": "GUIDER",
      "type": "GUIDER",
      "links": [
-      80
+      82
      ]
     }
    ],
@@ -2251,7 +2276,7 @@
      "name": "NOISE",
      "type": "NOISE",
      "links": [
-      79
+      81
      ]
     }
    ],
@@ -2283,7 +2308,7 @@
      "name": "SAMPLER",
      "type": "SAMPLER",
      "links": [
-      81
+      83
      ]
     }
    ],
@@ -2298,7 +2323,7 @@
    "id": 50,
    "type": "H3FaceAtlasSigmas",
    "pos": [
-    6780,
+    7200,
     612
    ],
    "size": [
@@ -2306,13 +2331,13 @@
     236
    ],
    "flags": {},
-   "order": 16,
+   "order": 17,
    "mode": 0,
    "inputs": [
     {
      "name": "atlas",
      "type": "H3_FACE_ATLAS",
-     "link": 78
+     "link": 80
     }
    ],
    "outputs": [
@@ -2320,7 +2345,7 @@
      "name": "sigmas",
      "type": "SIGMAS",
      "links": [
-      82
+      84
      ]
     },
     {
@@ -2349,7 +2374,7 @@
    "id": 51,
    "type": "SamplerCustomAdvanced",
    "pos": [
-    7620,
+    8040,
     60
    ],
    "size": [
@@ -2357,33 +2382,33 @@
     210
    ],
    "flags": {},
-   "order": 18,
+   "order": 19,
    "mode": 0,
    "inputs": [
     {
      "name": "noise",
      "type": "NOISE",
-     "link": 79
+     "link": 81
     },
     {
      "name": "guider",
      "type": "GUIDER",
-     "link": 80
+     "link": 82
     },
     {
      "name": "sampler",
      "type": "SAMPLER",
-     "link": 81
+     "link": 83
     },
     {
      "name": "sigmas",
      "type": "SIGMAS",
-     "link": 82
+     "link": 84
     },
     {
      "name": "latent_image",
      "type": "LATENT",
-     "link": 83
+     "link": 85
     }
    ],
    "outputs": [
@@ -2391,7 +2416,7 @@
      "name": "output",
      "type": "LATENT",
      "links": [
-      84
+      86
      ]
     },
     {
@@ -2409,7 +2434,7 @@
    "id": 52,
    "type": "VAEDecode",
    "pos": [
-    8040,
+    8460,
     60
    ],
    "size": [
@@ -2417,18 +2442,18 @@
     132
    ],
    "flags": {},
-   "order": 19,
+   "order": 20,
    "mode": 0,
    "inputs": [
     {
      "name": "samples",
      "type": "LATENT",
-     "link": 84
+     "link": 86
     },
     {
      "name": "vae",
      "type": "VAE",
-     "link": 85
+     "link": 87
     }
    ],
    "outputs": [
@@ -2436,8 +2461,8 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      87,
-      101
+      89,
+      109
      ]
     }
    ],
@@ -2450,7 +2475,7 @@
    "id": 53,
    "type": "H3FaceAtlasStitch",
    "pos": [
-    8460,
+    8880,
     60
    ],
    "size": [
@@ -2458,23 +2483,23 @@
     314
    ],
    "flags": {},
-   "order": 20,
+   "order": 21,
    "mode": 0,
    "inputs": [
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 86
+     "link": 88
     },
     {
      "name": "refined",
      "type": "IMAGE",
-     "link": 87
+     "link": 89
     },
     {
      "name": "atlas",
      "type": "H3_FACE_ATLAS",
-     "link": 88
+     "link": 90
     }
    ],
    "outputs": [
@@ -2482,8 +2507,9 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      42,
-      43
+      44,
+      45,
+      100
      ]
     }
    ],
@@ -2501,10 +2527,144 @@
   },
   {
    "id": 54,
+   "type": "FastDeropeRetimePrompt",
+   "pos": [
+    3840,
+    456
+   ],
+   "size": [
+    380,
+    184
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "seg_map",
+     "type": "STRING",
+     "link": 91
+    },
+    {
+     "name": "segment_start",
+     "type": "INT",
+     "link": 92
+    }
+   ],
+   "outputs": [
+    {
+     "name": "prompt",
+     "type": "STRING",
+     "links": [
+      24
+     ]
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "FastDeropeRetimePrompt"
+   },
+   "widgets_values": [
+    "integrated_multimodal_description: [Shot 1] 2d anime style, cyberpunk edgerunners style, a static wide full shot of a rainy neon city street at night, wet asphalt reflecting pink and cyan signs, tall buildings on both sides. Two characters walk slowly toward the camera down the middle of the street, seen head to toe, small in the frame. On the left, a young man with messy brown hair and a yellow jacket with a white stripe talks with lively mouth movements, glancing at his partner. On the right, a slim young woman with a silver bob haircut with pink tips, red eyeliner and a white cropped jacket smirks and answers him. The young man (S1) says: <d>[Japanese] \u6b21\u306e\u4ed5\u4e8b\u3001\u672c\u5f53\u306b\u3084\u308b\u306e\u304b\uff1f</d> The young woman (S2) says: <d>[Japanese] \u3082\u3061\u308d\u3093\u3002\u6708\u307e\u3067\u884c\u304f\u3093\u3067\u3057\u3087\u3002</d>\n\noverall_soundscape: Rain pattering on the street, a deep low hum of the city, distant traffic rumble, footsteps on wet ground.\n\nnon_diegetic_music: N/A",
+    24.0
+   ]
+  },
+  {
+   "id": 55,
+   "type": "H3AudioSmear",
+   "pos": [
+    3840,
+    680
+   ],
+   "size": [
+    380,
+    184
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "audio",
+     "type": "AUDIO",
+     "link": 93
+    },
+    {
+     "name": "hold_map",
+     "type": "STRING",
+     "link": 94,
+     "widget": {
+      "name": "hold_map"
+     }
+    }
+   ],
+   "outputs": [
+    {
+     "name": "AUDIO",
+     "type": "AUDIO",
+     "links": [
+      95
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "H3AudioSmear"
+   },
+   "widgets_values": [
+    "",
+    24
+   ]
+  },
+  {
+   "id": 56,
+   "type": "VAEEncodeAudio",
+   "pos": [
+    4260,
+    440
+   ],
+   "size": [
+    380,
+    132
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "audio",
+     "type": "AUDIO",
+     "link": 95
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 96
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      21
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEEncodeAudio"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 57,
    "type": "H3HiresFix",
    "pos": [
     9300,
-    492
+    846
    ],
    "size": [
     380,
@@ -2517,27 +2677,27 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 89
+     "link": 97
     },
     {
      "name": "positive",
      "type": "CONDITIONING",
-     "link": 90
+     "link": 98
     },
     {
      "name": "latent",
      "type": "LATENT",
-     "link": 91
+     "link": 99
     },
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 92
+     "link": 100
     },
     {
      "name": "vae",
      "type": "VAE",
-     "link": 93
+     "link": 101
     },
     {
      "name": "face_atlas",
@@ -2550,7 +2710,7 @@
      "name": "latent",
      "type": "LATENT",
      "links": [
-      96
+      104
      ]
     },
     {
@@ -2575,7 +2735,7 @@
    "title": "HIRES: H3 Hires Fix (taeh3 encode, LBH upscale, 2 DMAD steps from 0.45, audio pinned)"
   },
   {
-   "id": 55,
+   "id": 58,
    "type": "LoraLoaderModelOnly",
    "pos": [
     1320,
@@ -2592,7 +2752,7 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 94
+     "link": 102
     }
    ],
    "outputs": [
@@ -2600,7 +2760,7 @@
      "name": "MODEL",
      "type": "MODEL",
      "links": [
-      95
+      103
      ]
     }
    ],
@@ -2614,7 +2774,7 @@
    "title": "HIRES: DMAD turbo 0.8 for the refine (take already fixed)"
   },
   {
-   "id": 56,
+   "id": 59,
    "type": "MiniMaxH3SigmaShift",
    "pos": [
     1740,
@@ -2631,7 +2791,7 @@
     {
      "name": "model",
      "type": "MODEL",
-     "link": 95
+     "link": 103
     }
    ],
    "outputs": [
@@ -2639,7 +2799,7 @@
      "name": "MODEL",
      "type": "MODEL",
      "links": [
-      89
+      97
      ]
     }
    ],
@@ -2653,11 +2813,11 @@
    "title": "HIRES: shift for the refine model"
   },
   {
-   "id": 57,
+   "id": 60,
    "type": "LTXVSeparateAVLatent",
    "pos": [
     9720,
-    60
+    492
    ],
    "size": [
     380,
@@ -2670,7 +2830,7 @@
     {
      "name": "av_latent",
      "type": "LATENT",
-     "link": 96
+     "link": 104
     }
    ],
    "outputs": [
@@ -2678,7 +2838,7 @@
      "name": "video_latent",
      "type": "LATENT",
      "links": [
-      97
+      105
      ]
     },
     {
@@ -2694,7 +2854,7 @@
    "title": "HIRES: split video / audio"
   },
   {
-   "id": 58,
+   "id": 61,
    "type": "VAEDecode",
    "pos": [
     10140,
@@ -2711,12 +2871,12 @@
     {
      "name": "samples",
      "type": "LATENT",
-     "link": 97
+     "link": 105
     },
     {
      "name": "vae",
      "type": "VAE",
-     "link": 98
+     "link": 106
     }
    ],
    "outputs": [
@@ -2724,7 +2884,7 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      100
+      108
      ]
     }
    ],
@@ -2735,10 +2895,10 @@
    "title": "HIRES: decode 1920x1088"
   },
   {
-   "id": 59,
+   "id": 62,
    "type": "H3FaceAtlasRescale",
    "pos": [
-    6780,
+    7200,
     888
    ],
    "size": [
@@ -2746,13 +2906,13 @@
     158
    ],
    "flags": {},
-   "order": 16,
+   "order": 17,
    "mode": 0,
    "inputs": [
     {
      "name": "atlas",
      "type": "H3_FACE_ATLAS",
-     "link": 99
+     "link": 107
     }
    ],
    "outputs": [
@@ -2760,7 +2920,7 @@
      "name": "H3_FACE_ATLAS",
      "type": "H3_FACE_ATLAS",
      "links": [
-      102
+      110
      ]
     }
    ],
@@ -2774,7 +2934,7 @@
    "title": "HIRES: FaceDetail atlas scaled to 1920x1088"
   },
   {
-   "id": 60,
+   "id": 63,
    "type": "H3FaceAtlasStitchChunked",
    "pos": [
     10560,
@@ -2791,17 +2951,17 @@
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 100
+     "link": 108
     },
     {
      "name": "refined",
      "type": "IMAGE",
-     "link": 101
+     "link": 109
     },
     {
      "name": "atlas",
      "type": "H3_FACE_ATLAS",
-     "link": 102
+     "link": 110
     }
    ],
    "outputs": [
@@ -2809,7 +2969,7 @@
      "name": "IMAGE",
      "type": "IMAGE",
      "links": [
-      104
+      112
      ]
     }
    ],
@@ -2827,7 +2987,7 @@
    "title": "HIRES: FaceDetail's 512 px face tiles stitched onto the hires frames (chunked: long clips stay in RAM)"
   },
   {
-   "id": 61,
+   "id": 64,
    "type": "H3HoldTransfer",
    "pos": [
     10980,
@@ -2844,12 +3004,12 @@
     {
      "name": "reference",
      "type": "IMAGE",
-     "link": 103
+     "link": 111
     },
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 104
+     "link": 112
     }
    ],
    "outputs": [
@@ -2857,7 +3017,7 @@
      "name": "images",
      "type": "IMAGE",
      "links": [
-      105
+      113
      ]
     },
     {
@@ -2877,7 +3037,7 @@
    "title": "HIRES: Hold Transfer (exact 2s/3s holds of the 1 MP clip; never re-run Anime Cadence here)"
   },
   {
-   "id": 62,
+   "id": 65,
    "type": "VHS_VideoCombine",
    "pos": [
     11400,
@@ -2894,12 +3054,12 @@
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 105
+     "link": 113
     },
     {
      "name": "audio",
      "type": "AUDIO",
-     "link": 106
+     "link": 114
     },
     {
      "name": "meta_batch",
@@ -2941,7 +3101,7 @@
    }
   },
   {
-   "id": 63,
+   "id": 66,
    "type": "Note",
    "pos": [
     60,
@@ -2962,7 +3122,7 @@
    ]
   },
   {
-   "id": 64,
+   "id": 67,
    "type": "Note",
    "pos": [
     580,
@@ -2979,7 +3139,7 @@
    "outputs": [],
    "properties": {},
    "widgets_values": [
-    "1 MP -> 1920x1088 after the anime pipeline (see the ResCascade README). The 1 MP pipeline decides everything (motion, de-roped impacts, faces, cadence, audio). H3 Hires Fix redraws only lines/texture at 1920 (DMAD is free here). Small faces would be redrawn badly at 1920, so FaceDetail's own face tiles are stitched again at hires. Re-running Anime Cadence after hires can hold the wrong drawing over an impact frame, so Hold Transfer copies the 1 MP holds instead. Edgerunners wide street: 345 s total (1 MP pipeline ~248 s + hires ~98 s)."
+    "1 MP -> 1920x1088 after the anime pipeline (the ResCascade README). The 1 MP pipeline decides everything (motion, de-roped impacts, faces, cadence, audio). H3 Hires Fix redraws only lines/texture at 1920 (DMAD is free here). Small faces would be redrawn badly at 1920, so FaceDetail's own face tiles are stitched again at hires. Re-running Anime Cadence after hires can hold the wrong drawing over an impact frame, so Hold Transfer copies the 1 MP holds instead. Edgerunners wide street: 345 s total (1 MP pipeline ~248 s + hires ~98 s)."
    ]
   }
  ],
@@ -3146,6 +3306,14 @@
   ],
   [
    21,
+   56,
+   0,
+   19,
+   3,
+   "LATENT"
+  ],
+  [
+   22,
    2,
    0,
    20,
@@ -3153,7 +3321,7 @@
    "CLIP"
   ],
   [
-   22,
+   23,
    6,
    0,
    20,
@@ -3161,23 +3329,31 @@
    "VAE"
   ],
   [
-   23,
-   38,
-   2,
-   20,
-   2,
-   "INT"
-  ],
-  [
    24,
-   36,
+   54,
    0,
    20,
-   3,
-   "IMAGE"
+   2,
+   "STRING"
   ],
   [
    25,
+   38,
+   2,
+   20,
+   3,
+   "INT"
+  ],
+  [
+   26,
+   36,
+   0,
+   20,
+   4,
+   "IMAGE"
+  ],
+  [
+   27,
    8,
    0,
    21,
@@ -3185,7 +3361,7 @@
    "MODEL"
   ],
   [
-   26,
+   28,
    21,
    0,
    22,
@@ -3193,7 +3369,7 @@
    "MODEL"
   ],
   [
-   27,
+   29,
    22,
    0,
    23,
@@ -3201,7 +3377,7 @@
    "MODEL"
   ],
   [
-   28,
+   30,
    23,
    0,
    24,
@@ -3209,7 +3385,7 @@
    "MODEL"
   ],
   [
-   29,
+   31,
    20,
    0,
    24,
@@ -3217,7 +3393,7 @@
    "CONDITIONING"
   ],
   [
-   30,
+   32,
    23,
    0,
    25,
@@ -3225,7 +3401,7 @@
    "MODEL"
   ],
   [
-   31,
+   33,
    26,
    0,
    27,
@@ -3233,7 +3409,7 @@
    "NOISE"
   ],
   [
-   32,
+   34,
    24,
    0,
    27,
@@ -3241,7 +3417,7 @@
    "GUIDER"
   ],
   [
-   33,
+   35,
    13,
    0,
    27,
@@ -3249,7 +3425,7 @@
    "SAMPLER"
   ],
   [
-   34,
+   36,
    25,
    0,
    27,
@@ -3257,7 +3433,7 @@
    "SIGMAS"
   ],
   [
-   35,
+   37,
    19,
    0,
    27,
@@ -3265,7 +3441,7 @@
    "LATENT"
   ],
   [
-   36,
+   38,
    27,
    0,
    28,
@@ -3273,7 +3449,7 @@
    "LATENT"
   ],
   [
-   37,
+   39,
    4,
    0,
    28,
@@ -3281,7 +3457,7 @@
    "VAE"
   ],
   [
-   38,
+   40,
    28,
    0,
    29,
@@ -3289,7 +3465,7 @@
    "IMAGE"
   ],
   [
-   39,
+   41,
    38,
    1,
    29,
@@ -3297,7 +3473,7 @@
    "STRING"
   ],
   [
-   40,
+   42,
    15,
    0,
    30,
@@ -3305,7 +3481,7 @@
    "LATENT"
   ],
   [
-   41,
+   43,
    5,
    0,
    30,
@@ -3313,34 +3489,18 @@
    "VAE"
   ],
   [
-   42,
+   44,
    53,
    0,
    31,
    0,
    "IMAGE"
-  ],
-  [
-   43,
-   53,
-   0,
-   32,
-   0,
-   "IMAGE"
-  ],
-  [
-   44,
-   30,
-   0,
-   32,
-   1,
-   "AUDIO"
   ],
   [
    45,
-   31,
+   53,
    0,
-   33,
+   32,
    0,
    "IMAGE"
   ],
@@ -3348,12 +3508,28 @@
    46,
    30,
    0,
-   33,
+   32,
    1,
    "AUDIO"
   ],
   [
    47,
+   31,
+   0,
+   33,
+   0,
+   "IMAGE"
+  ],
+  [
+   48,
+   30,
+   0,
+   33,
+   1,
+   "AUDIO"
+  ],
+  [
+   49,
    15,
    0,
    34,
@@ -3361,7 +3537,7 @@
    "LATENT"
   ],
   [
-   48,
+   50,
    4,
    0,
    34,
@@ -3369,7 +3545,7 @@
    "VAE"
   ],
   [
-   49,
+   51,
    17,
    0,
    35,
@@ -3377,7 +3553,7 @@
    "IMAGE"
   ],
   [
-   50,
+   52,
    16,
    0,
    35,
@@ -3385,7 +3561,7 @@
    "STRING"
   ],
   [
-   51,
+   53,
    34,
    0,
    35,
@@ -3393,7 +3569,7 @@
    "IMAGE"
   ],
   [
-   52,
+   54,
    34,
    0,
    36,
@@ -3401,7 +3577,7 @@
    "IMAGE"
   ],
   [
-   53,
+   55,
    35,
    3,
    36,
@@ -3409,7 +3585,7 @@
    "INT"
   ],
   [
-   54,
+   56,
    34,
    0,
    37,
@@ -3417,7 +3593,7 @@
    "IMAGE"
   ],
   [
-   55,
+   57,
    35,
    2,
    37,
@@ -3425,7 +3601,7 @@
    "STRING"
   ],
   [
-   56,
+   58,
    29,
    0,
    37,
@@ -3433,31 +3609,31 @@
    "IMAGE"
   ],
   [
-   57,
-   35,
-   0,
-   38,
-   0,
-   "IMAGE"
-  ],
-  [
-   58,
-   35,
-   1,
-   38,
-   1,
-   "STRING"
-  ],
-  [
    59,
-   38,
+   35,
    0,
-   39,
+   38,
    0,
    "IMAGE"
   ],
   [
    60,
+   35,
+   1,
+   38,
+   1,
+   "STRING"
+  ],
+  [
+   61,
+   38,
+   0,
+   39,
+   0,
+   "IMAGE"
+  ],
+  [
+   62,
    38,
    1,
    39,
@@ -3465,7 +3641,7 @@
    "STRING"
   ],
   [
-   61,
+   63,
    35,
    0,
    39,
@@ -3473,7 +3649,7 @@
    "IMAGE"
   ],
   [
-   62,
+   64,
    37,
    0,
    40,
@@ -3481,7 +3657,7 @@
    "IMAGE"
   ],
   [
-   63,
+   65,
    40,
    0,
    41,
@@ -3489,7 +3665,7 @@
    "IMAGE"
   ],
   [
-   64,
+   66,
    3,
    0,
    41,
@@ -3497,7 +3673,7 @@
    "VAE"
   ],
   [
-   65,
+   67,
    30,
    0,
    42,
@@ -3505,7 +3681,7 @@
    "AUDIO"
   ],
   [
-   66,
+   68,
    5,
    0,
    42,
@@ -3513,7 +3689,7 @@
    "VAE"
   ],
   [
-   67,
+   69,
    41,
    0,
    43,
@@ -3521,7 +3697,7 @@
    "LATENT"
   ],
   [
-   68,
+   70,
    40,
    1,
    43,
@@ -3529,7 +3705,7 @@
    "MASK"
   ],
   [
-   69,
+   71,
    42,
    0,
    43,
@@ -3537,7 +3713,7 @@
    "LATENT"
   ],
   [
-   70,
+   72,
    2,
    0,
    44,
@@ -3545,7 +3721,7 @@
    "CLIP"
   ],
   [
-   71,
+   73,
    3,
    0,
    44,
@@ -3553,7 +3729,7 @@
    "VAE"
   ],
   [
-   72,
+   74,
    40,
    4,
    44,
@@ -3561,7 +3737,7 @@
    "INT"
   ],
   [
-   73,
+   75,
    40,
    5,
    44,
@@ -3569,7 +3745,7 @@
    "INT"
   ],
   [
-   74,
+   76,
    8,
    0,
    45,
@@ -3577,7 +3753,7 @@
    "MODEL"
   ],
   [
-   75,
+   77,
    45,
    0,
    46,
@@ -3585,7 +3761,7 @@
    "MODEL"
   ],
   [
-   76,
+   78,
    46,
    0,
    47,
@@ -3593,7 +3769,7 @@
    "MODEL"
   ],
   [
-   77,
+   79,
    44,
    0,
    47,
@@ -3601,7 +3777,7 @@
    "CONDITIONING"
   ],
   [
-   78,
+   80,
    40,
    2,
    50,
@@ -3609,7 +3785,7 @@
    "H3_FACE_ATLAS"
   ],
   [
-   79,
+   81,
    48,
    0,
    51,
@@ -3617,7 +3793,7 @@
    "NOISE"
   ],
   [
-   80,
+   82,
    47,
    0,
    51,
@@ -3625,7 +3801,7 @@
    "GUIDER"
   ],
   [
-   81,
+   83,
    49,
    0,
    51,
@@ -3633,7 +3809,7 @@
    "SAMPLER"
   ],
   [
-   82,
+   84,
    50,
    0,
    51,
@@ -3641,7 +3817,7 @@
    "SIGMAS"
   ],
   [
-   83,
+   85,
    43,
    0,
    51,
@@ -3649,7 +3825,7 @@
    "LATENT"
   ],
   [
-   84,
+   86,
    51,
    0,
    52,
@@ -3657,7 +3833,7 @@
    "LATENT"
   ],
   [
-   85,
+   87,
    4,
    0,
    52,
@@ -3665,7 +3841,7 @@
    "VAE"
   ],
   [
-   86,
+   88,
    37,
    0,
    53,
@@ -3673,7 +3849,7 @@
    "IMAGE"
   ],
   [
-   87,
+   89,
    52,
    0,
    53,
@@ -3681,7 +3857,7 @@
    "IMAGE"
   ],
   [
-   88,
+   90,
    40,
    2,
    53,
@@ -3689,52 +3865,36 @@
    "H3_FACE_ATLAS"
   ],
   [
-   89,
-   56,
-   0,
-   54,
-   0,
-   "MODEL"
-  ],
-  [
-   90,
-   10,
-   0,
-   54,
-   1,
-   "CONDITIONING"
-  ],
-  [
    91,
-   15,
-   0,
+   38,
+   1,
    54,
-   2,
-   "LATENT"
+   0,
+   "STRING"
   ],
   [
    92,
-   31,
-   0,
-   54,
+   35,
    3,
-   "IMAGE"
+   54,
+   1,
+   "INT"
   ],
   [
    93,
-   6,
-   0,
-   54,
-   4,
-   "VAE"
-  ],
-  [
-   94,
-   8,
+   30,
    0,
    55,
    0,
-   "MODEL"
+   "AUDIO"
+  ],
+  [
+   94,
+   38,
+   4,
+   55,
+   1,
+   "STRING"
   ],
   [
    95,
@@ -3742,93 +3902,157 @@
    0,
    56,
    0,
-   "MODEL"
+   "AUDIO"
   ],
   [
    96,
-   54,
+   5,
    0,
-   57,
-   0,
-   "LATENT"
-  ],
-  [
-   97,
-   57,
-   0,
-   58,
-   0,
-   "LATENT"
-  ],
-  [
-   98,
-   4,
-   0,
-   58,
+   56,
    1,
    "VAE"
   ],
   [
-   99,
-   40,
-   2,
+   97,
    59,
    0,
-   "H3_FACE_ATLAS"
+   57,
+   0,
+   "MODEL"
+  ],
+  [
+   98,
+   10,
+   0,
+   57,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   99,
+   15,
+   0,
+   57,
+   2,
+   "LATENT"
   ],
   [
    100,
-   58,
+   53,
    0,
-   60,
-   0,
+   57,
+   3,
    "IMAGE"
   ],
   [
    101,
-   52,
+   6,
+   0,
+   57,
+   4,
+   "VAE"
+  ],
+  [
+   102,
+   8,
+   0,
+   58,
+   0,
+   "MODEL"
+  ],
+  [
+   103,
+   58,
+   0,
+   59,
+   0,
+   "MODEL"
+  ],
+  [
+   104,
+   57,
    0,
    60,
+   0,
+   "LATENT"
+  ],
+  [
+   105,
+   60,
+   0,
+   61,
+   0,
+   "LATENT"
+  ],
+  [
+   106,
+   4,
+   0,
+   61,
+   1,
+   "VAE"
+  ],
+  [
+   107,
+   40,
+   2,
+   62,
+   0,
+   "H3_FACE_ATLAS"
+  ],
+  [
+   108,
+   61,
+   0,
+   63,
+   0,
+   "IMAGE"
+  ],
+  [
+   109,
+   52,
+   0,
+   63,
    1,
    "IMAGE"
   ],
   [
-   102,
-   59,
+   110,
+   62,
    0,
-   60,
+   63,
    2,
    "H3_FACE_ATLAS"
   ],
   [
-   103,
+   111,
    31,
    0,
-   61,
+   64,
    0,
    "IMAGE"
   ],
   [
-   104,
-   60,
+   112,
+   63,
    0,
-   61,
+   64,
    1,
    "IMAGE"
   ],
   [
-   105,
-   61,
+   113,
+   64,
    0,
-   62,
+   65,
    0,
    "IMAGE"
   ],
   [
-   106,
+   114,
    30,
    0,
-   62,
+   65,
    1,
    "AUDIO"
   ]

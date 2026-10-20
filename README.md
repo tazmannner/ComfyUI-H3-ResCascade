@@ -109,8 +109,10 @@ You can build the same chain from about seven stock nodes; H3 Hires Fix is that 
 ## Example workflows
 
 - `example_workflows/h3_hires_1080p.json`: t2v at 1 MP -> H3 Hires Fix (DMAD) -> 1920x1088.
-- `example_workflows/h3_fast_derope_face_hires.json`: t2v 1 MP -> Fast De-rope -> FaceDetail -> Anime Cadence -> H3 Hires
-  Fix (taeh3 encode, DMAD) -> FaceDetail tiles re-stitched at 1920 -> Hold Transfer.
+- `example_workflows/h3_fast_derope_face_hires.json`: t2v 1 MP -> Fast De-rope -> FaceDetail -> H3 Hires Fix (taeh3
+  encode, DMAD) -> FaceDetail tiles re-stitched at 1920 -> Hold Transfer from the Anime Cadence clip. The hires runs on
+  the frames *before* Anime Cadence: FaceDetail's tiles are indexed on those frames, and Cadence can move a cut by a
+  frame, which put a close-up face tile onto the next shot.
 
 ## Requirements
 
