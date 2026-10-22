@@ -96,7 +96,9 @@ You can build the same chain from about seven stock nodes; H3 Hires Fix is that 
   - For frames from Fast De-rope / FaceDetail, wire `images` and a VAE; taeh3 is fine for this encode.
 - **H3 Hold Transfer**: gives the hires clip exactly the 2s/3s holds of the 1 MP clip, per pixel. Use it instead of
   re-running Anime Cadence after hires: re-running re-decides the cadence and can hold the wrong drawing over an impact
-  frame.
+  frame. When the hires ran on the frames *before* Anime Cadence, wire those frames into `source`: Anime Cadence holds
+  the sharpest frame of each hold, and without `source` the hold shows the hires version of the hold's first frame
+  instead (e.g. a transition frame instead of the impact flash after it).
 - **H3 Face Atlas Rescale** / **H3 Face Atlas Stitch (chunked)**: re-stitch FaceDetail's 512 px face tiles onto the
   hires frames. A hires refine redraws small faces from ~2 tokens again, and a latent upscale turns them to smudges. The
   chunked stitch keeps RAM in check on long clips (15 s at 1920).
@@ -112,7 +114,8 @@ You can build the same chain from about seven stock nodes; H3 Hires Fix is that 
 - `example_workflows/h3_fast_derope_face_hires.json`: t2v 1 MP -> Fast De-rope -> FaceDetail -> H3 Hires Fix (taeh3
   encode, DMAD) -> FaceDetail tiles re-stitched at 1920 -> Hold Transfer from the Anime Cadence clip. The hires runs on
   the frames *before* Anime Cadence: FaceDetail's tiles are indexed on those frames, and Cadence can move a cut by a
-  frame, which put a close-up face tile onto the next shot.
+  frame, which put a close-up face tile onto the next shot. Hold Transfer gets those frames as `source`, so each hold
+  shows the drawing Anime Cadence picked.
 
 ## Requirements
 

@@ -1,6 +1,6 @@
 {
  "last_node_id": 67,
- "last_link_id": 114,
+ "last_link_id": 115,
  "nodes": [
   {
    "id": 1,
@@ -1296,7 +1296,7 @@
       48,
       67,
       93,
-      114
+      115
      ]
     }
    ],
@@ -2509,7 +2509,8 @@
      "links": [
       44,
       45,
-      100
+      100,
+      113
      ]
     }
    ],
@@ -2995,7 +2996,7 @@
    ],
    "size": [
     380,
-    210
+    236
    ],
    "flags": {},
    "order": 26,
@@ -3010,6 +3011,11 @@
      "name": "images",
      "type": "IMAGE",
      "link": 112
+    },
+    {
+     "name": "source",
+     "type": "IMAGE",
+     "link": 113
     }
    ],
    "outputs": [
@@ -3017,7 +3023,7 @@
      "name": "images",
      "type": "IMAGE",
      "links": [
-      113
+      114
      ]
     },
     {
@@ -3034,7 +3040,7 @@
     2,
     4
    ],
-   "title": "HIRES: Hold Transfer (exact 2s/3s holds of the 1 MP clip; never re-run Anime Cadence here)"
+   "title": "HIRES: Hold Transfer (exact 2s/3s holds of the 1 MP clip; source = Anime Cadence's input, so each hold shows the frame Cadence picked; never re-run Anime Cadence here)"
   },
   {
    "id": 65,
@@ -3054,12 +3060,12 @@
     {
      "name": "images",
      "type": "IMAGE",
-     "link": 113
+     "link": 114
     },
     {
      "name": "audio",
      "type": "AUDIO",
-     "link": 114
+     "link": 115
     },
     {
      "name": "meta_batch",
@@ -4042,6 +4048,14 @@
   ],
   [
    113,
+   53,
+   0,
+   64,
+   2,
+   "IMAGE"
+  ],
+  [
+   114,
    64,
    0,
    65,
@@ -4049,7 +4063,7 @@
    "IMAGE"
   ],
   [
-   114,
+   115,
    30,
    0,
    65,
