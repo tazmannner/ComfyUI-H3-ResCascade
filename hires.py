@@ -61,6 +61,26 @@ def face_keep_mask(atlas, T, h, w, margin):
     return k[0, :, :h, :w]
 
 
+def _fit_keyframes(positive, size):
+    """Image-to-video conditioning carries its first/last frame as `minimax_keyframes` latents encoded at the pass-1
+    size, and H3 packs them on the target's spatial grid, so they cannot ride along at a bigger size. Drop the ones
+    that don't match: the frames being refined already contain them. Audio-only keyframes and Ref2VA `minimax_refs`
+    (own grid) are kept."""
+    out, dropped = [], 0
+    for c, d in positive:
+        kfs = d.get("minimax_keyframes")
+        if kfs:
+            keep = [k for k in kfs if k.get("latent") is None or tuple(k["latent"].shape[-2:]) == tuple(size)]
+            dropped += len(kfs) - len(keep)
+            d = dict(d)
+            if keep:
+                d["minimax_keyframes"] = keep
+            else:
+                d.pop("minimax_keyframes")
+        out.append([c, d])
+    return out, dropped
+
+
 class H3HiresFix:
     @classmethod
     def INPUT_TYPES(cls):
@@ -68,7 +88,9 @@ class H3HiresFix:
         return {
             "required": {
                 "model": ("MODEL", {"tooltip": "the pass-1 model (same LoRAs + shift); a turbo LoRA works with steps_override"}),
-                "positive": ("CONDITIONING", {"tooltip": "the pass-1 conditioning (text cond does not depend on size)"}),
+                "positive": ("CONDITIONING", {"tooltip": "the pass-1 conditioning (text cond does not depend on size; an "
+                                                         "image-to-video start/end frame is dropped, the refined frames "
+                                                         "already contain it)"}),
                 "latent": ("LATENT", {"tooltip": "pass-1 AV latent (sampler output). Its audio is pinned; its video is "
                                                  "upscaled unless 'images' is wired"}),
                 "width": ("INT", {"default": 1920, "min": 64, "max": 8192, "step": 32}),
@@ -126,6 +148,9 @@ class H3HiresFix:
 
         sigmas = hires_sigmas(model, sigma_start, schedule_steps, steps_override)
         print(f"[H3HiresFix] {tuple(xs[0].shape[-2:])} -> {size}, sigmas {[round(float(s), 4) for s in sigmas]}")
+        positive, dropped = _fit_keyframes(positive, size)
+        if dropped:
+            print(f"[H3HiresFix] dropped {dropped} pass-1 keyframe(s) (start/end image) sized for pass 1")
         guider = Guider_Basic(model)
         guider.set_conds(positive)
         noise = comfy.sample.prepare_noise(samples, seed)
