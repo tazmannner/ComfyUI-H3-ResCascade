@@ -725,6 +725,7 @@
     1088,
     0.45,
     108,
+    "fixed",
     "minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors",
     20,
     2,
